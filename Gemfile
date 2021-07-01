@@ -7,8 +7,8 @@ gemspec
 
 group :test, :development do
   gem 'byebug'
+  gem 'fakefs', require: 'fakefs/safe'
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.0'
   gem 'rubocop', '~> 0.80'
-  gem "fakefs", require: "fakefs/safe"
 end

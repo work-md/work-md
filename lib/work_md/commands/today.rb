@@ -6,8 +6,8 @@ module WorkMd
       class << self
         def description; end
 
-        def execute(argv = [], options = {})
-          today = options[:today] || DateTime.now
+        def execute(_argv = [])
+          today = DateTime.now
 
           ::FileUtils.mkdir_p("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}")
           unless ::File.exist?("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md")

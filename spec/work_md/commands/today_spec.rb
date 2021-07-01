@@ -4,15 +4,16 @@ require 'fileutils'
 
 RSpec.describe WorkMd::Commands::Today do
   let(:test_work_dir) { 'spec/test_work_dir' }
+  let(:today) { DateTime.now }
 
   before do
+    allow(DateTime).to receive(:now).and_return(today)
     allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
   end
 
   after { FileUtils.rm_rf(test_work_dir) }
 
   context 'executing' do
-    let(:today) { DateTime.now }
     let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
     let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}" }
 
@@ -22,7 +23,7 @@ RSpec.describe WorkMd::Commands::Today do
         .and_return(true)
       )
 
-      described_class.execute([], { today: today })
+      described_class.execute([])
 
       expect(
        ::File
@@ -39,7 +40,7 @@ RSpec.describe WorkMd::Commands::Today do
       ::FileUtils.mkdir_p(expected_md_file_dir)
       ::File.open(expected_md_file, 'w+') { |f| f.puts("test") }
 
-      described_class.execute([], { today: today })
+      described_class.execute([])
 
       expect(
         ::File
@@ -55,7 +56,7 @@ RSpec.describe WorkMd::Commands::Today do
           .with("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
       )
 
-      described_class.execute([], { today: today })
+      described_class.execute([])
     end
   end
 end
