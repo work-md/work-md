@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "byebug"
 require "work_md"
 
 RSpec.configure do |config|
