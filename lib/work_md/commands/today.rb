@@ -36,8 +36,6 @@ module WorkMd
           ::FileUtils.cd(WorkMd::Config.work_dir) do
             system("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
           end
-
-          exit
         end
       end
     end

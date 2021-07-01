@@ -1,3 +1,4 @@
+# TODO: Make this a class with receive an yaml file directory, this is easier to mock in test
 module WorkMd
   module Config
     def self.editor
