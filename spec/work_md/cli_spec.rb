@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe WorkMd::Cli do
-  describe "executing the given command" do
+  describe "executing today command" do
     context "when options not given" do
       it "execute the given command" do
         argv = ["today"]
@@ -22,23 +22,40 @@ RSpec.describe WorkMd::Cli do
         WorkMd::Cli.execute(argv)
       end
     end
+  end
 
-    context "command is empty" do
-      it "outputs error message" do
-        argv = []
+  describe "using alias" do
+    it do
+      WorkMd::Cli::ALIAS_COMMANDS.each do |alias_command|
+        argv = [alias_command.first]
 
-        expect { WorkMd::Cli.execute(argv) }
-          .to output(/Command missing!/).to_stdout
+        expect(Object
+          .const_get(
+            "WorkMd::Commands::#{alias_command.last.capitalize}")
+              )
+                .to(receive(:execute).with([]))
+
+        WorkMd::Cli.execute(argv)
       end
     end
+  end
 
-    context "command dont exist" do
-      it "outputs error message" do
-        argv = ["not_existent"]
+  context "command is empty" do
+    it "executes the default command" do
+      argv = []
 
-        expect { WorkMd::Cli.execute(argv) }
-          .to output(/Command not_existent not found!/).to_stdout
-      end
+      expect(WorkMd::Cli::DEFAULT_COMMAND).to(receive(:execute).with([]))
+
+      WorkMd::Cli.execute(argv)
+    end
+  end
+
+  context "command dont exist" do
+    it "outputs error message" do
+      argv = ["not_existent"]
+
+      expect { WorkMd::Cli.execute(argv) }
+        .to output(/Command 'not_existent' not found!/).to_stdout
     end
   end
 end

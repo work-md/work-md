@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require_relative '../lib/work_md'
+require 'work_md'
 
 WorkMd::Cli.execute(ARGV)

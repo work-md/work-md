@@ -9,9 +9,16 @@ module WorkMd
         def execute(_argv = [])
           today = DateTime.now
 
-          ::FileUtils.mkdir_p("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}")
-          unless ::File.exist?("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md")
-            ::File.open("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md", 'w+') do |f|
+          ::FileUtils
+            .mkdir_p("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}")
+          unless ::File
+                 .exist?(
+                   "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md"
+                 )
+            ::File.open(
+              "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md",
+              'w+'
+            ) do |f|
               f.puts("# #{today.strftime('%d/%m/%Y')} \n\n")
               f.puts("### Atividades:\n\n")
               f.puts("- [ ]\n\n")

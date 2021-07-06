@@ -4,26 +4,36 @@ module WorkMd
   module Cli
     class CommandMissing < RuntimeError; end
 
+    ALIAS_COMMANDS =
+      {
+        't' => 'today'
+      }.freeze
+
+    DEFAULT_COMMAND = WorkMd::Commands::Today
+
     def self.execute(argv)
       first_argv_argument = argv.shift
 
       raise CommandMissing if first_argv_argument.nil?
 
+      command =
+        (ALIAS_COMMANDS[first_argv_argument] || first_argv_argument).capitalize
+
       Object
-        .const_get("WorkMd::Commands::#{first_argv_argument.capitalize}")
+        .const_get("WorkMd::Commands::#{command}")
         .send(:execute, argv)
     rescue NameError
-      error("Command #{first_argv_argument} not found!")
+      error("Command '#{first_argv_argument}' not found!")
     rescue CommandMissing
-      error('Command missing!')
+      DEFAULT_COMMAND.execute(argv)
     end
 
     def self.error(message)
-      puts 'x - Error ------ x'
+      puts 'x - work_md error ------ x'
       puts ''
       puts message
       puts ''
-      puts 'x -------------- x'
+      puts 'x ---------------------- x'
     end
   end
 end
