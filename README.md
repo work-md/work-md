@@ -4,7 +4,7 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
 ## Installation
 
-**Ruby** >2 must be installed in your machine to `work_md` work, then install it yourself as:
+**Ruby** >2 must be installed in your machine, then install `work_md` yourself as:
 
     $ gem install work_md
 
