@@ -1,10 +1,17 @@
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
+AllCops:
+  Exclude:
+    - 'spec/**/*'
+    - 'work_md.gemspec'
 
 Layout/LineLength:
-  Max: 120
+  Max: 80
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: 20
+
