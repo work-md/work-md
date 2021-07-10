@@ -3,11 +3,9 @@
 module WorkMd
   module Commands
     class Parse
-      PARSED_FILE_PATH = WorkMd::Config.work_dir + 'parsed.md'
+      PARSED_FILE_PATH = WorkMd::Config.work_dir + '/parsed.md'
 
       class << self
-        def description; end
-
         def execute(argv = [])
           args = Hash[argv.join(' ').scan(/-?([^=\s]+)(?:=(\S+))?/)]
           parser = WorkMd::Parser::Engine.new
@@ -21,7 +19,7 @@ module WorkMd
           args['d'].split(',').each do |day|
             day = "0#{day.to_i}" if day.to_i < 10
 
-            file_name = WorkMd::Config.work_dir + "#{year}/#{month}/#{day}.md"
+            file_name = WorkMd::Config.work_dir + "/#{year}/#{month}/#{day}.md"
 
             parser.add_file(file_name)
           end

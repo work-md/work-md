@@ -36,4 +36,4 @@ Some meeting annotation
 
 ### Pomodoros:
 
-4
+10

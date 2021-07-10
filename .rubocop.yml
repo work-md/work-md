@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'spec/**/*'
+    - 'lib/work_md/commands/**/*'
     - 'work_md.gemspec'
 
 Layout/LineLength:

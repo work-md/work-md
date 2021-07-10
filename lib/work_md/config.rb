@@ -10,7 +10,7 @@ module WorkMd
     end
 
     def self.work_dir
-      "#{Dir.home}/work_md/"
+      "#{Dir.home}/work_md"
     end
 
     def self.translations

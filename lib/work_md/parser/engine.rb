@@ -27,10 +27,9 @@ module WorkMd
 
         file_content = File.read(file)
 
-        if file_content.start_with?('# ')
-          @parsed_files.push(parse_file_content(file_content))
-        end
-      rescue Errno::ENOENT
+        return unless file_content.start_with?('# ')
+
+        @parsed_files.push(parse_file_content(file_content))
       end
 
       def done_tasks
@@ -55,7 +54,8 @@ module WorkMd
       def meeting_annotations
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
-        @meeting_annotations ||= @parsed_files.map(&:meeting_annotations).flatten
+        @meeting_annotations ||=
+          @parsed_files.map(&:meeting_annotations).flatten
       end
 
       def meetings
@@ -89,6 +89,8 @@ module WorkMd
 
       private
 
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
       def parse_file_content(file_content)
         parsed_file = ParsedFile.new
 
@@ -96,24 +98,33 @@ module WorkMd
 
         contents_by_title.each do |content|
           if content.start_with?(@t[:tasks])
-            parsed_file.tasks = clear_list(content.split(":\n\n")[1].split('- ['))
+            parsed_file.tasks =
+              clear_list(content.split(":\n\n")[1].split('- ['))
           elsif content.start_with?(@t[:meetings])
-            parsed_file.meetings = clear_list(content.split(":\n\n")[1].split('- '))
+            parsed_file.meetings =
+              clear_list(content.split(":\n\n")[1].split('- '))
           elsif content.start_with?(@t[:annotations])
-            parsed_file.annotations = clear_list(content.split(":\n\n")[1])
+            parsed_file.annotations =
+              clear_list(content.split(":\n\n")[1])
           elsif content.start_with?(@t[:meeting_annotations])
-            parsed_file.meeting_annotations = clear_list(content.split(":\n\n")[1].split('- '))
+            parsed_file.meeting_annotations =
+              clear_list(content.split(":\n\n")[1].split('- '))
           elsif content.start_with?(@t[:interruptions])
-            parsed_file.interruptions = clear_list(content.split(":\n\n")[1].split('- '))
+            parsed_file.interruptions =
+              clear_list(content.split(":\n\n")[1].split('- '))
           elsif content.start_with?(@t[:difficulties])
-            parsed_file.difficulties = clear_list(content.split(":\n\n")[1].split('- '))
+            parsed_file.difficulties =
+              clear_list(content.split(":\n\n")[1].split('- '))
           elsif content.start_with?(@t[:pomodoros])
-            parsed_file.pomodoros = content.split(":\n\n")[1].scan(/\d+/).first.to_i
+            parsed_file.pomodoros =
+              content.split(":\n\n")[1].scan(/\d+/).first.to_i
           end
         end
 
         parsed_file
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def clear_list(list)
         return list unless list.is_a?(Array)

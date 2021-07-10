@@ -4,8 +4,6 @@ module WorkMd
   module Commands
     class Today
       class << self
-        def description; end
-
         def execute(_argv = [])
           today = DateTime.now
           t = WorkMd::Config.translations
@@ -30,7 +28,7 @@ module WorkMd
               f.puts("### #{t[:annotations]}:\n\n")
               f.puts("###### #{t[:meeting_annotations]}:\n\n")
               f.puts("---\n\n")
-              f.puts("### #{t[:interruption]}:\n\n")
+              f.puts("### #{t[:interruptions]}:\n\n")
               f.puts("---\n\n")
               f.puts("### #{t[:difficulties]}:\n\n")
               f.puts("---\n\n")

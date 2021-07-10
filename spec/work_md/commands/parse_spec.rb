@@ -2,11 +2,28 @@
 
 require 'fileutils'
 
-RSpec.describe WorkMd::Commands::Today do
+RSpec.describe WorkMd::Commands::Parse do
   let(:test_work_dir) { 'spec/test_work_dir' }
   let(:today) { DateTime.now }
+  let(:file_1_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
+  let(:file_2_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}2.md" }
 
   before do
+    ::FileUtils
+      .mkdir_p("#{test_work_dir}/#{today.strftime('%Y/%m')}")
+
+    FileUtils
+      .cp(
+        'spec/fixtures/work_md_file.md',
+        file_1_path
+      )
+
+    FileUtils
+      .cp(
+        'spec/fixtures/work_md_file2.md',
+        file_2_path
+      )
+
     allow(DateTime).to receive(:now).and_return(today)
     allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
   end
@@ -14,24 +31,21 @@ RSpec.describe WorkMd::Commands::Today do
   after { FileUtils.rm_rf(test_work_dir) }
 
   context 'executing' do
-    let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
-    let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}" }
-
-    it 'creates the md file in the work dir' do
+    it 'creates the parsed.md file in the work dir' do
       allow_any_instance_of(Kernel).to(
         receive(:system)
         .and_return(true)
       )
 
-      described_class.execute([])
+      described_class.execute(["-d=#{today.strftime('%d')}"])
 
       expect(
        ::File
-        .exist?(expected_md_file)
+        .exist?(WorkMd::Commands::Parse::PARSED_FILE_PATH)
       ).to be_truthy
 
       t = WorkMd::Config.translations
-      file_content = ::File.read(expected_md_file)
+      file_content = ::File.read(WorkMd::Commands::Parse::PARSED_FILE_PATH)
 
       expect(file_content).to match(t[:tasks])
       expect(file_content).to match(t[:meetings])
@@ -42,32 +56,15 @@ RSpec.describe WorkMd::Commands::Today do
       expect(file_content).to match(t[:pomodoros])
     end
 
-    it 'dont creates the md file when already exists' do
-      allow_any_instance_of(Kernel).to(
-        receive(:system)
-        .and_return(true)
-      )
-
-      ::FileUtils.mkdir_p(expected_md_file_dir)
-      ::File.open(expected_md_file, 'w+') { |f| f.puts("test") }
-
-      described_class.execute([])
-
-      expect(
-        ::File
-        .exist?(expected_md_file)
-      ).to be_truthy
-
-      expect(File.read(expected_md_file)).to eq("test\n")
-    end
-
     it 'opens the md file in the work dir' do
       expect_any_instance_of(Kernel).to(
         receive(:system)
-          .with("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
+          .with(
+            "#{WorkMd::Config.editor} #{WorkMd::Commands::Parse::PARSED_FILE_PATH}"
+          )
       )
 
-      described_class.execute([])
+      described_class.execute(["-d=#{today.strftime('%d')}"])
     end
   end
 end
