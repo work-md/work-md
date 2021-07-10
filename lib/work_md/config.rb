@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-# TODO: Make this a class with receive an yaml file directory,
-# this is easier to mock in test
-# TODO: Set language (i18n) as a config
+require 'yaml'
+
 module WorkMd
   module Config
+    DEFAULT_WORK_DIR = Dir.home + '/work_md'
+    YAML_FILE = YAML.load_file(DEFAULT_WORK_DIR + '/config.yml')
+    DEFAULT_EDITOR = 'vi'
     TRANSLATIONS = {
       'pt' =>
         {
@@ -28,16 +30,22 @@ module WorkMd
         }
     }.freeze
 
+    def self.title
+      YAML_FILE['title']
+    end
+
     def self.editor
-      ENV['EDITOR'] || ENV['VISUAL'] || 'vi'
+      ENV['EDITOR'] || ENV['VISUAL'] || YAML_FILE['editor'] || DEFAULT_EDITOR
     end
 
     def self.work_dir
-      ENV['WORK_MD_DIR'] || "#{Dir.home}/work_md"
+      ENV['WORK_MD_DIR'] || DEFAULT_WORK_DIR
     end
 
     def self.translations
-      TRANSLATIONS[ENV['WORK_MD_LANG']] || TRANSLATIONS['en']
+      TRANSLATIONS[ENV['WORK_MD_LANG']] ||
+        TRANSLATIONS[YAML_FILE['lang']] ||
+        TRANSLATIONS['en']
     end
   end
 end

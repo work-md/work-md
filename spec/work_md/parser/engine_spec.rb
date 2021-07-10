@@ -25,6 +25,9 @@ RSpec.describe WorkMd::Parser::Engine do
 
       allow(DateTime).to receive(:now).and_return(today)
       allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
+      allow(WorkMd::Config).to(
+        receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
+      )
     end
 
     after { FileUtils.rm_rf(test_work_dir) }
