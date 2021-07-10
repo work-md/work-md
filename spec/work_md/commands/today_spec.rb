@@ -16,8 +16,8 @@ RSpec.describe WorkMd::Commands::Today do
     let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}" }
 
     it 'creates the md file in the work dir' do
-      allow_any_instance_of(Kernel).to(
-        receive(:system)
+      allow(::TTY::Editor).to(
+        receive(:open)
         .and_return(true)
       )
 
@@ -42,8 +42,8 @@ RSpec.describe WorkMd::Commands::Today do
     end
 
     it 'dont creates the md file when already exists' do
-      allow_any_instance_of(Kernel).to(
-        receive(:system)
+      allow(::TTY::Editor).to(
+        receive(:open)
         .and_return(true)
       )
 
@@ -61,9 +61,10 @@ RSpec.describe WorkMd::Commands::Today do
     end
 
     it 'opens the md file in the work dir' do
-      expect_any_instance_of(Kernel).to(
-        receive(:system)
-          .with("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
+      allow(::TTY::Editor).to(
+        receive(:open)
+          .with("#{today.strftime('%Y/%m/%d')}.md")
+          .and_return(true)
       )
 
       described_class.execute([])

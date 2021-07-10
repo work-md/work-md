@@ -64,7 +64,7 @@ module WorkMd
               f.puts(parser.pomodoros)
             end
 
-            system("#{WorkMd::Config.editor} #{PARSED_FILE_PATH}")
+            ::TTY::Editor.open(PARSED_FILE_PATH)
           rescue
             WorkMd::Cli.info(
               ::TTY::Box.frame(

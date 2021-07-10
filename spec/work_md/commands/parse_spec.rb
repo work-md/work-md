@@ -30,8 +30,8 @@ RSpec.describe WorkMd::Commands::Parse do
 
   context 'executing' do
     it 'creates the parsed.md file in the work dir' do
-      allow_any_instance_of(Kernel).to(
-        receive(:system)
+      allow(::TTY::Editor).to(
+        receive(:open)
         .and_return(true)
       )
 
@@ -55,11 +55,10 @@ RSpec.describe WorkMd::Commands::Parse do
     end
 
     it 'opens the md file in the work dir' do
-      expect_any_instance_of(Kernel).to(
-        receive(:system)
-          .with(
-            "#{WorkMd::Config.editor} #{WorkMd::Commands::Parse::PARSED_FILE_PATH}"
-          )
+      allow(::TTY::Editor).to(
+        receive(:open)
+        .with(WorkMd::Commands::Parse::PARSED_FILE_PATH)
+        .and_return(true)
       )
 
       described_class.execute(["-d=#{today.strftime('%d')}"])
@@ -67,10 +66,10 @@ RSpec.describe WorkMd::Commands::Parse do
 
     context 'when error happened' do
       it 'prints usage examples' do
-        expect_any_instance_of(Kernel).to_not(
-          receive(:system)
+        expect(::TTY::Editor).to_not(
+          receive(:open)
           .with(
-            "#{WorkMd::Config.editor} #{WorkMd::Commands::Parse::PARSED_FILE_PATH}"
+            WorkMd::Commands::Parse::PARSED_FILE_PATH
           )
         )
 

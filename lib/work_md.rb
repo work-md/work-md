@@ -9,6 +9,7 @@ require_relative 'work_md/cli'
 require 'date'
 require 'fileutils'
 require 'tty-box'
+require 'tty-editor'
 
 module WorkMd
 end

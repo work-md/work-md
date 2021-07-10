@@ -38,7 +38,7 @@ module WorkMd
           end
 
           ::FileUtils.cd(work_dir) do
-            system("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
+            ::TTY::Editor.open("#{today.strftime('%Y/%m/%d')}.md")
           end
         end
       end
