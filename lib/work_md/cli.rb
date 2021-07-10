@@ -24,18 +24,19 @@ module WorkMd
         .const_get("WorkMd::Commands::#{command}")
         .send(:execute, argv)
     rescue NameError
-      error("Command '#{first_argv_argument}' not found!")
+      puts info("Command '#{first_argv_argument}' not found!")
     rescue CommandMissing
       DEFAULT_COMMAND.execute(argv)
     end
 
-    # TODO: Create messages specific class
-    def self.error(message)
-      puts 'x - work_md error ------ x'
-      puts ''
-      puts message
-      puts ''
-      puts 'x ---------------------- x'
+    def self.info(message)
+      puts ::TTY::Box.frame(
+        ::TTY::Box.info(message),
+        "Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!",
+        "eaed",
+        padding: 1,
+        title: {top_left: "(WorkMd)", bottom_right: "(v#{WorkMd::VERSION})"}
+      )
     end
   end
 end

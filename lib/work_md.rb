@@ -8,6 +8,7 @@ require_relative 'work_md/commands/parse'
 require_relative 'work_md/cli'
 require 'date'
 require 'fileutils'
+require 'tty-box'
 
 module WorkMd
 end

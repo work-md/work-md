@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "./spec/helpers"
 require "byebug"
 require "fileutils"
 require "work_md"
@@ -13,5 +14,14 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.include Helpers
+
+  config.before(:each) do
+    allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
+    allow(WorkMd::Config).to(
+      receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
+    )
   end
 end

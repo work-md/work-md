@@ -3,8 +3,6 @@
 require 'fileutils'
 
 RSpec.describe WorkMd::Commands::Parse do
-  # TODO: DRY test_work_dir in all tests
-  let(:test_work_dir) { 'spec/test_work_dir' }
   let(:today) { DateTime.now }
   let(:file_1_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
   let(:file_2_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}2.md" }
@@ -26,12 +24,6 @@ RSpec.describe WorkMd::Commands::Parse do
       )
 
     allow(DateTime).to receive(:now).and_return(today)
-
-    # TODO: DRY it in all tests
-    allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
-    allow(WorkMd::Config).to(
-      receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
-    )
   end
 
   after { FileUtils.rm_rf(test_work_dir) }

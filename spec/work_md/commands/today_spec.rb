@@ -3,15 +3,10 @@
 require 'fileutils'
 
 RSpec.describe WorkMd::Commands::Today do
-  let(:test_work_dir) { 'spec/test_work_dir' }
   let(:today) { DateTime.now }
 
   before do
     allow(DateTime).to receive(:now).and_return(today)
-    allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
-    allow(WorkMd::Config).to(
-      receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
-    )
   end
 
   after { FileUtils.rm_rf(test_work_dir) }

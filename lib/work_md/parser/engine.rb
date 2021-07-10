@@ -25,7 +25,6 @@ module WorkMd
       def add_file(file)
         raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
-        # TODO: Write tests for this behaviour
         begin
           file_content = File.read(file)
         rescue Errno::ENOENT
@@ -94,43 +93,53 @@ module WorkMd
 
       private
 
-      # TODO: Refactor this method
-      # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity
       def parse_file_content(file_content)
         parsed_file = ParsedFile.new
 
-        contents_by_title = file_content.split('### ')
-
-        contents_by_title.each do |content|
-          if content.start_with?(@t[:tasks])
-            parsed_file.tasks =
-              clear_list(content.split(":\n\n")[1].split('- ['))
-          elsif content.start_with?(@t[:meetings])
-            parsed_file.meetings =
-              clear_list(content.split(":\n\n")[1].split('- '))
-          elsif content.start_with?(@t[:meeting_annotations])
-            parsed_file.meeting_annotations =
-              clear_list(content.split(":\n\n")[1])
-          elsif content.start_with?(@t[:annotations])
-            parsed_file.annotations =
-              clear_list(content.split(":\n\n")[1])
-          elsif content.start_with?(@t[:interruptions])
-            parsed_file.interruptions =
-              clear_list(content.split(":\n\n")[1].split('- '))
-          elsif content.start_with?(@t[:difficulties])
-            parsed_file.difficulties =
-              clear_list(content.split(":\n\n")[1].split('- '))
-          elsif content.start_with?(@t[:pomodoros])
-            parsed_file.pomodoros =
-              content.split(":\n\n")[1].scan(/\d+/).first.to_i
-          end
-        end
+        file_content
+          .split('### ')
+          .each { |content| parse_content(parsed_file, content) }
 
         parsed_file
       end
+
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+      def parse_content(parsed_file, content)
+        if content.start_with?(@t[:tasks])
+          parsed_file.tasks = parse_task_list(content)
+        elsif content.start_with?(@t[:meetings])
+          parsed_file.meetings = parse_list(content)
+        elsif content.start_with?(@t[:meeting_annotations])
+          parsed_file.meeting_annotations = basic_parse(content)
+        elsif content.start_with?(@t[:annotations])
+          parsed_file.annotations = basic_parse(content)
+        elsif content.start_with?(@t[:interruptions])
+          parsed_file.interruptions = parse_list(content)
+        elsif content.start_with?(@t[:difficulties])
+          parsed_file.difficulties = parse_list(content)
+        elsif content.start_with?(@t[:pomodoros])
+          parsed_file.pomodoros = parse_pomodoro(content)
+        end
+      end
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
+
+      def parse_task_list(content)
+        clear_list(basic_parse(content).split('- ['))
+      end
+
+      def parse_list(content)
+        clear_list(basic_parse(content).split('- '))
+      end
+
+      def parse_pomodoro(content)
+        basic_parse(content).scan(/\d+/).first.to_i
+      end
+
+      def basic_parse(content)
+        content.split(":\n\n")[1]
+      end
 
       def clear_list(list)
         return list unless list.is_a?(Array)
