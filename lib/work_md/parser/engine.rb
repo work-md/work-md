@@ -3,7 +3,8 @@
 module WorkMd
   module Parser
     class Engine
-      FROZEN_ERROR_MESSAGE = "#{self.class.name} is frozen"
+      IS_FROZEN_ERROR_MESSAGE = 'WorkMd::Parser::Engine is frozen'
+      IS_NOT_FROZEN_ERROR_MESSAGE = 'WorkMd::Parser::Engine is not frozen'
 
       class ParsedFile
         attr_accessor :tasks,
@@ -12,8 +13,7 @@ module WorkMd
                       :meetings,
                       :interruptions,
                       :difficulties,
-                      :pomodoros,
-                      :point
+                      :pomodoros
       end
 
       def initialize
@@ -23,7 +23,7 @@ module WorkMd
       end
 
       def add_file(file)
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
         file_content = File.read(file)
 
@@ -34,59 +34,53 @@ module WorkMd
       end
 
       def done_tasks
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @done_tasks ||=
           tasks.filter { |t| t.start_with?('x]') || t.start_with?('X]') }
       end
 
       def tasks
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @tasks ||= @parsed_files.map(&:tasks).flatten
       end
 
       def annotations
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @annotations ||= @parsed_files.map(&:annotations).flatten
       end
 
       def meeting_annotations
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @meeting_annotations ||= @parsed_files.map(&:meeting_annotations).flatten
       end
 
       def meetings
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @meetings ||= @parsed_files.map(&:meetings).flatten
       end
 
       def interruptions
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @interruptions ||= @parsed_files.map(&:interruptions).flatten
       end
 
       def difficulties
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @difficulties ||= @parsed_files.map(&:difficulties).flatten
       end
 
       def pomodoros
-        raise FROZEN_ERROR_MESSAGE if @frozen
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @pomodoros ||=
           @parsed_files.reduce(0) { |sum, f| sum + f.pomodoros || 0 }
-      end
-
-      def point
-        raise FROZEN_ERROR_MESSAGE if @frozen
-
-        @point ||= @parsed_files.map(&:point).flatten
       end
 
       def freeze
@@ -100,23 +94,21 @@ module WorkMd
 
         contents_by_title = file_content.split('### ')
 
-        contents_by_title.each do |c|
-          if c.start_with?(@t[:tasks])
-            parsed_file.tasks = clear_list(c.split(":\n\n")[1].split('- ['))
-          elsif c.start_with?(@t[:meetings])
-            parsed_file.meetings = clear_list(c.split(":\n\n")[1].split('- '))
-          elsif c.start_with?(@t[:annotations])
-            parsed_file.annotations = clear_list(c.split(":\n\n")[1])
-          elsif c.start_with?(@t[:meeting_annotations])
-            parsed_file.meeting_annotations = clear_list(c.split(":\n\n")[1].split('- '))
-          elsif c.start_with?(@t[:interruptions])
-            parsed_file.interruptions = clear_list(c.split(":\n\n")[1].split('- '))
-          elsif c.start_with?(@t[:difficulties])
-            parsed_file.difficulties = clear_list(c.split(":\n\n")[1].split('- '))
-          elsif c.start_with?(@t[:pomodoros])
-            parsed_file.pomodoros = c.split(":\n\n")[1].scan(/\d+/).first.to_i
-          elsif c.start_with?(@t[:point])
-            parsed_file.point = clear_list(c.split(":\n\n")[1].split('- '))
+        contents_by_title.each do |content|
+          if content.start_with?(@t[:tasks])
+            parsed_file.tasks = clear_list(content.split(":\n\n")[1].split('- ['))
+          elsif content.start_with?(@t[:meetings])
+            parsed_file.meetings = clear_list(content.split(":\n\n")[1].split('- '))
+          elsif content.start_with?(@t[:annotations])
+            parsed_file.annotations = clear_list(content.split(":\n\n")[1])
+          elsif content.start_with?(@t[:meeting_annotations])
+            parsed_file.meeting_annotations = clear_list(content.split(":\n\n")[1].split('- '))
+          elsif content.start_with?(@t[:interruptions])
+            parsed_file.interruptions = clear_list(content.split(":\n\n")[1].split('- '))
+          elsif content.start_with?(@t[:difficulties])
+            parsed_file.difficulties = clear_list(content.split(":\n\n")[1].split('- '))
+          elsif content.start_with?(@t[:pomodoros])
+            parsed_file.pomodoros = content.split(":\n\n")[1].scan(/\d+/).first.to_i
           end
         end
 

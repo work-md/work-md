@@ -8,39 +8,38 @@ module WorkMd
 
         def execute(_argv = [])
           today = DateTime.now
+          t = WorkMd::Config.translations
+          work_dir = WorkMd::Config.work_dir
 
           ::FileUtils
-            .mkdir_p("#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}")
+            .mkdir_p("#{work_dir}/#{today.strftime('%Y/%m')}")
           unless ::File
                  .exist?(
-                   "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md"
+                   "#{work_dir}/#{today.strftime('%Y/%m/%d')}.md"
                  )
             ::File.open(
-              "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md",
+              "#{work_dir}/#{today.strftime('%Y/%m/%d')}.md",
               'w+'
             ) do |f|
               f.puts("# #{today.strftime('%d/%m/%Y')} \n\n")
-              f.puts("### Atividades:\n\n")
+              f.puts("### #{t[:tasks]}:\n\n")
               f.puts("- [ ]\n\n")
               f.puts("---\n\n")
-              f.puts("### Reuniões:\n\n")
+              f.puts("### #{t[:meetings]}:\n\n")
               f.puts("---\n\n")
-              f.puts("### Anotações:\n\n")
-              f.puts("###### Anotações de Reunião:\n\n")
+              f.puts("### #{t[:annotations]}:\n\n")
+              f.puts("###### #{t[:meeting_annotations]}:\n\n")
               f.puts("---\n\n")
-              f.puts("### Interrupções:\n\n")
+              f.puts("### #{t[:interruption]}:\n\n")
               f.puts("---\n\n")
-              f.puts("### Dificuldades:\n\n")
+              f.puts("### #{t[:difficulties]}:\n\n")
               f.puts("---\n\n")
-              f.puts("### Pomodoros:\n\n")
+              f.puts("### #{t[:pomodoros]}:\n\n")
               f.puts("0\n\n")
-              f.puts("---\n\n")
-              f.puts("### Ponto:\n\n")
-              f.puts("- \n\n")
             end
           end
 
-          ::FileUtils.cd(WorkMd::Config.work_dir) do
+          ::FileUtils.cd(work_dir) do
             system("#{WorkMd::Config.editor} #{today.strftime('%Y/%m/%d')}.md")
           end
         end
