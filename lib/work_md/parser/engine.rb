@@ -103,12 +103,12 @@ module WorkMd
           elsif content.start_with?(@t[:meetings])
             parsed_file.meetings =
               clear_list(content.split(":\n\n")[1].split('- '))
+          elsif content.start_with?(@t[:meeting_annotations])
+            parsed_file.meeting_annotations =
+              clear_list(content.split(":\n\n")[1])
           elsif content.start_with?(@t[:annotations])
             parsed_file.annotations =
               clear_list(content.split(":\n\n")[1])
-          elsif content.start_with?(@t[:meeting_annotations])
-            parsed_file.meeting_annotations =
-              clear_list(content.split(":\n\n")[1].split('- '))
           elsif content.start_with?(@t[:interruptions])
             parsed_file.interruptions =
               clear_list(content.split(":\n\n")[1].split('- '))
