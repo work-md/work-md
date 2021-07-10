@@ -25,7 +25,12 @@ module WorkMd
       def add_file(file)
         raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
-        file_content = File.read(file)
+        # TODO: Write tests for this behaviour
+        begin
+          file_content = File.read(file)
+        rescue Errno::ENOENT
+          return
+        end
 
         return unless file_content.start_with?('# ')
 
@@ -89,6 +94,7 @@ module WorkMd
 
       private
 
+      # TODO: Refactor this method
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
       def parse_file_content(file_content)

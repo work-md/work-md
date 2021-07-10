@@ -29,6 +29,7 @@ module WorkMd
       DEFAULT_COMMAND.execute(argv)
     end
 
+    # TODO: Create messages specific class
     def self.error(message)
       puts 'x - work_md error ------ x'
       puts ''
