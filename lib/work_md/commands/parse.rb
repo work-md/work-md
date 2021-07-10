@@ -30,7 +30,7 @@ module WorkMd
             File.delete(PARSED_FILE_PATH) if File.exist? PARSED_FILE_PATH
 
             File.open(PARSED_FILE_PATH, 'w+') do |f|
-              f.puts("# #{args.inspect}\n\n")
+              f.puts("# #{WorkMd::Config.title}\n\n")
               f.puts("### #{t[:tasks]}:\n\n")
               parser.tasks.each do |task|
                 f.puts("- [#{task}\n\n") if task != ' ]'
@@ -70,10 +70,10 @@ module WorkMd
               ::TTY::Box.frame(
                 "Usage examples:",
                 "",
-                "parse -d=1 -m=5 -y=2000 | get day 1 from month 5 and year 2000",
-                "parse -d=1,2,3          | get day 1, 2 and 3 from the current month and year",
-                "parse -d=1,2 -m=4       | get day 1 and 2 from month 4 and current year",
-                WorkMd::Cli.error_frame_style
+                "work_md parse -d=1 -m=5 -y=2000 | get day 1 from month 5 and year 2000",
+                "work_md parse -d=1,2,3          | get day 1, 2 and 3 from the current month and year",
+                "work_md parse -d=1,2 -m=4       | get day 1 and 2 from month 4 and current year",
+                **WorkMd::Cli.error_frame_style
               )
             )
           end

@@ -27,7 +27,7 @@ module WorkMd
       puts info(
         ::TTY::Box.frame(
           "Command '#{first_argv_argument}' not found!",
-          error_frame_style
+          **error_frame_style
         )
       )
     rescue CommandMissing
@@ -48,7 +48,7 @@ module WorkMd
         '',
         'read more in github.com/henriquefernandez/work_md',
         padding: 1,
-        title: { top_left: '(WorkMd)', bottom_right: "(v#{WorkMd::VERSION})" }
+        title: { top_left: '(work_md)', bottom_right: "(v#{WorkMd::VERSION})" }
       )
       # rubocop:enable Layout/LineLength
     end
@@ -56,7 +56,7 @@ module WorkMd
     def self.error_frame_style
       {
         padding: 1,
-        title: { top_left: '(Error)' }
+        title: { top_left: '(error)' }
       }
     end
   end

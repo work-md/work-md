@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     work_md (0.2.0)
-      tty-box
-      tty-editor
+      tty-box (~> 0.7.0)
+      tty-editor (~> 0.7.0)
 
 GEM
   remote: https://rubygems.org/
