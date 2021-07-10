@@ -6,7 +6,8 @@ module WorkMd
 
     ALIAS_COMMANDS =
       {
-        't' => 'today'
+        't' => 'today',
+        'p' => 'parse'
       }.freeze
 
     DEFAULT_COMMAND = WorkMd::Commands::Today
@@ -23,17 +24,40 @@ module WorkMd
         .const_get("WorkMd::Commands::#{command}")
         .send(:execute, argv)
     rescue NameError
-      error("Command '#{first_argv_argument}' not found!")
+      puts info(
+        ::TTY::Box.frame(
+          "Command '#{first_argv_argument}' not found!",
+          **error_frame_style
+        )
+      )
     rescue CommandMissing
       DEFAULT_COMMAND.execute(argv)
     end
 
-    def self.error(message)
-      puts 'x - work_md error ------ x'
-      puts ''
-      puts message
-      puts ''
-      puts 'x ---------------------- x'
+    def self.info(message = '')
+      # rubocop:disable Layout/LineLength
+      puts ::TTY::Box.frame(
+        message,
+        'Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!',
+        '',
+        'commands available:',
+        '',
+        '- work_md',
+        '- work_md today',
+        '- work_md parse',
+        '',
+        'read more in github.com/henriquefernandez/work_md',
+        padding: 1,
+        title: { top_left: '(work_md)', bottom_right: "(v#{WorkMd::VERSION})" }
+      )
+      # rubocop:enable Layout/LineLength
+    end
+
+    def self.error_frame_style
+      {
+        padding: 1,
+        title: { top_left: '(error)' }
+      }
     end
   end
 end
