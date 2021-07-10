@@ -31,7 +31,7 @@ module WorkMd
     }.freeze
 
     def self.title
-      YAML_FILE['title']
+      YAML_FILE['title'] || ''
     end
 
     def self.editor

@@ -31,6 +31,7 @@ RSpec.describe WorkMd::Commands::Today do
       t = WorkMd::Config.translations
       file_content = ::File.read(expected_md_file)
 
+      expect(file_content).to match(WorkMd::Config.title)
       expect(file_content).to match(t[:tasks])
       expect(file_content).to match(t[:meetings])
       expect(file_content).to match(t[:annotations])

@@ -13,17 +13,9 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
 To open or create a new work markdown file for today:
 
-    $ EDITOR=[YOUR_FAVORITE_EDITOR] work_md
+    $ work_md
 
 by default, a work markdown file live in `[YOUR_HOME_DIRECTORY]/work_md/[YEAR]/[MONTH]/[DAY].md`
-
-i like to make an alias:
-
-    $ echo "alias today='EDITOR=[YOUR_FAVORITE_EDITOR] work_md'" >> ~/.bashrc && source ~/.bashrc
-
-and open the today markdown file just like that (NOT NECESSARY):
-
-    $ today
 
 ## Development
 

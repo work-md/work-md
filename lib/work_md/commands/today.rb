@@ -19,7 +19,7 @@ module WorkMd
               "#{work_dir}/#{today.strftime('%Y/%m/%d')}.md",
               'w+'
             ) do |f|
-              f.puts("# #{today.strftime('%d/%m/%Y')} \n\n")
+              f.puts("# #{today.strftime('%d/%m/%Y')} - #{WorkMd::Config.title} \n\n")
               f.puts("### #{t[:tasks]}:\n\n")
               f.puts("- [ ]\n\n")
               f.puts("---\n\n")

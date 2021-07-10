@@ -24,6 +24,17 @@ RSpec.describe WorkMd::Cli do
     end
   end
 
+  describe "using info" do
+    it "outputs info message" do
+      message = "some message"
+
+      expect { WorkMd::Cli.info(message) }
+        .to output(/Track your work activities, write annotations/).to_stdout
+      expect { WorkMd::Cli.info(message) }
+        .to output(/#{message}/).to_stdout
+    end
+  end
+
   describe "using alias" do
     it do
       WorkMd::Cli::ALIAS_COMMANDS.each do |alias_command|

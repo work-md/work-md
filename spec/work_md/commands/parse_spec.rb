@@ -64,5 +64,20 @@ RSpec.describe WorkMd::Commands::Parse do
 
       described_class.execute(["-d=#{today.strftime('%d')}"])
     end
+
+    context 'when error happened' do
+      it 'prints usage examples' do
+        expect_any_instance_of(Kernel).to_not(
+          receive(:system)
+          .with(
+            "#{WorkMd::Config.editor} #{WorkMd::Commands::Parse::PARSED_FILE_PATH}"
+          )
+        )
+
+        expect { described_class.execute(["-d bla"]) }
+          .to output(/Usage examples:/).to_stdout
+
+      end
+    end
   end
 end

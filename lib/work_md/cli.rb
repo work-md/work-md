@@ -24,19 +24,40 @@ module WorkMd
         .const_get("WorkMd::Commands::#{command}")
         .send(:execute, argv)
     rescue NameError
-      puts info("Command '#{first_argv_argument}' not found!")
+      puts info(
+        ::TTY::Box.frame(
+          "Command '#{first_argv_argument}' not found!",
+          error_frame_style
+        )
+      )
     rescue CommandMissing
       DEFAULT_COMMAND.execute(argv)
     end
 
-    def self.info(message)
+    def self.info(message = '')
+      # rubocop:disable Layout/LineLength
       puts ::TTY::Box.frame(
-        ::TTY::Box.info(message),
-        "Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!",
-        "eaed",
+        message,
+        'Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!',
+        '',
+        'commands available:',
+        '',
+        '- work_md',
+        '- work_md today',
+        '- work_md parse',
+        '',
+        'read more in github.com/henriquefernandez/work_md',
         padding: 1,
-        title: {top_left: "(WorkMd)", bottom_right: "(v#{WorkMd::VERSION})"}
+        title: { top_left: '(WorkMd)', bottom_right: "(v#{WorkMd::VERSION})" }
       )
+      # rubocop:enable Layout/LineLength
+    end
+
+    def self.error_frame_style
+      {
+        padding: 1,
+        title: { top_left: '(Error)' }
+      }
     end
   end
 end
