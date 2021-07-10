@@ -7,6 +7,7 @@ module WorkMd
     ALIAS_COMMANDS =
       {
         't' => 'today'
+        'p' => 'parse'
       }.freeze
 
     DEFAULT_COMMAND = WorkMd::Commands::Today
