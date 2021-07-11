@@ -4,14 +4,14 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
 ## Installation
 
-**Ruby** >2 must be installed in your machine, then install `work_md` yourself as:
+**Ruby >2** must be installed in your machine, then install `work_md` yourself as:
 
     $ gem install work_md
 
 
 ## Usage
 
-To open or create a new work markdown file for today:
+### Open or create a new work markdown file for today:
 
     $ work_md
 
@@ -22,6 +22,35 @@ If no default editor was set in your environment variables `work_md` will prompt
 You can also set the editor directly in the command call:
 
     $ EDITOR=[YOUR_FAVORITE_EDITOR] work_md
+
+### Parse your work markdown files:
+
+Day 1 from month 5 and year 2000:
+
+    $ work_md parse -d=1 -m=5 -y=2000
+
+Day 1, 2 and 3 from the current month and year:
+             
+    $ work_md parse -d=1,2,3
+
+Day 1 and 2 from month 4 and current year:
+
+    $ work_md parse -d=1,2 -m=4    
+
+### Configure your preferences:
+
+Create a config file in `[YOUR_HOME_DIRECTORY]/work_md`:
+
+    $ touch ~/work_md/config.yml
+    
+Copy and paste the yaml bellow in your config.yml:
+
+```yaml
+title: Henrique F. Teixeira # Title of your files
+editor: gedit # Your default editor
+lang: pt # Your language (only pt and en available)
+```
+
 
 ## Development
 
