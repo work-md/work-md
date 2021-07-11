@@ -4,7 +4,7 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
 ## Installation
 
-**Ruby >2** must be installed in your machine, then install `work_md` yourself as:
+**Ruby > 2** must be installed in your machine, then install `work_md` yourself as:
 
     $ gem install work_md
 
@@ -39,7 +39,7 @@ Day 1 and 2 from month 4 and current year:
 
 ### Configure your preferences:
 
-Create a config file in `[YOUR_HOME_DIRECTORY]/work_md`:
+Create a `config.yml` file in `[YOUR_HOME_DIRECTORY]/work_md`:
 
     $ touch ~/work_md/config.yml
     
@@ -50,6 +50,12 @@ title: Henrique F. Teixeira # Title of your files
 editor: gedit # Your default editor
 lang: pt # Your language (only pt and en available)
 ```
+
+### Aliases:
+
+`work_md today`-> `work_md t` or just `work_md`
+
+`work_md parse`-> `work_md p`
 
 
 ## Development
