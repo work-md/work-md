@@ -5,7 +5,6 @@ require 'yaml'
 module WorkMd
   module Config
     DEFAULT_WORK_DIR = Dir.home + '/work_md'
-    DEFAULT_EDITOR = 'vi'
     TRANSLATIONS = {
       'pt' =>
         {
@@ -34,7 +33,7 @@ module WorkMd
     end
 
     def self.editor
-      ENV['EDITOR'] || ENV['VISUAL'] || yaml_file['editor'] || DEFAULT_EDITOR
+      ENV['EDITOR'] || ENV['VISUAL'] || yaml_file['editor'] || nil
     end
 
     def self.work_dir
