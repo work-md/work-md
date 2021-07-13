@@ -31,12 +31,12 @@ module WorkMd
 
             File.open(PARSED_FILE_PATH, 'w+') do |f|
               f.puts("# #{WorkMd::Config.title}\n\n")
-              f.puts("### #{t[:tasks]}:\n\n")
+              f.puts("### #{t[:tasks]} (#{parser.tasks.size}):\n\n")
               parser.tasks.each do |task|
                 f.puts("- [#{task}\n\n") if task != ' ]'
               end
               f.puts("---\n\n")
-              f.puts("### #{t[:meetings]}:\n\n")
+              f.puts("### #{t[:meetings]} (#{parser.meetings.size}):\n\n")
               parser.meetings.each do |meeting|
                 f.puts("- #{meeting}\n\n")
               end
@@ -50,12 +50,12 @@ module WorkMd
                 f.puts("- #{meeting_annotation}\n\n")
               end
               f.puts("---\n\n")
-              f.puts("### #{t[:interruptions]}:\n\n")
+              f.puts("### #{t[:interruptions]} (#{parser.interruptions.size}):\n\n")
               parser.interruptions.each do |interruption|
                 f.puts("- #{interruption}\n\n")
               end
               f.puts("---\n\n")
-              f.puts("### #{t[:difficulties]}:\n\n")
+              f.puts("### #{t[:difficulties]} (#{parser.difficulties.size}):\n\n")
               parser.difficulties.each do |difficulty|
                 f.puts("- #{difficulty}\n\n")
               end
