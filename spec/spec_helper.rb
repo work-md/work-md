@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.before(:each) do
     allow(WorkMd::Config).to receive(:title).and_return('test title')
     allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
+    allow(WorkMd::Config).to receive(:editor).and_return(nil)
     allow(WorkMd::Config).to(
       receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
     )

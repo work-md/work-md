@@ -56,14 +56,29 @@ RSpec.describe WorkMd::Commands::Parse do
       expect(file_content).to match(/\b1\b/)
     end
 
-    it 'opens the md file in the work dir' do
-      allow(::TTY::Editor).to(
-        receive(:open)
-        .with(WorkMd::Commands::Parse::PARSED_FILE_PATH)
-        .and_return(true)
-      )
+    context 'opening the md file in the work dir' do
+      it 'when editor not set' do
+        allow(::TTY::Editor).to(
+          receive(:open)
+          .with(WorkMd::Commands::Parse::PARSED_FILE_PATH)
+          .and_return(true)
+        )
 
-      described_class.execute(["-d=#{today.strftime('%d')}"])
+        described_class.execute(["-d=#{today.strftime('%d')}"])
+      end
+
+      it 'when editor set' do
+        editor = "vim"
+
+        allow(WorkMd::Config).to(receive(:editor).and_return(editor))
+        allow(::TTY::Editor).to(
+          receive(:open)
+          .with(WorkMd::Commands::Parse::PARSED_FILE_PATH, { command: editor })
+          .and_return(true)
+        )
+
+        described_class.execute(["-d=#{today.strftime('%d')}"])
+      end
     end
 
     context 'when error happened' do

@@ -60,14 +60,29 @@ RSpec.describe WorkMd::Commands::Today do
       expect(File.read(expected_md_file)).to eq("test\n")
     end
 
-    it 'opens the md file in the work dir' do
-      allow(::TTY::Editor).to(
-        receive(:open)
+    context 'opening the md file in the work dir' do
+      it 'when editor not set' do
+        allow(::TTY::Editor).to(
+          receive(:open)
           .with("#{today.strftime('%Y/%m/%d')}.md")
           .and_return(true)
-      )
+        )
 
-      described_class.execute([])
+        described_class.execute([])
+      end
+
+      it 'when editor set' do
+        editor = "vim"
+
+        allow(WorkMd::Config).to(receive(:editor).and_return(editor))
+        allow(::TTY::Editor).to(
+          receive(:open)
+          .with("#{today.strftime('%Y/%m/%d')}.md", { command: editor })
+          .and_return(true)
+        )
+
+        described_class.execute([])
+      end
     end
   end
 end
