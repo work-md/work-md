@@ -77,7 +77,7 @@ RSpec.describe WorkMd::Commands::Today do
         allow(WorkMd::Config).to(receive(:editor).and_return(editor))
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md", { command: editor })
+          .with("#{today.strftime('%Y/%m/%d')}.md", command: editor)
           .and_return(true)
         )
 

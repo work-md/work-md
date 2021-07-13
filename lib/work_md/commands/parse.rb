@@ -67,7 +67,7 @@ module WorkMd
             editor = WorkMd::Config.editor
 
             unless editor.nil?
-              ::TTY::Editor.open(PARSED_FILE_PATH, {command: editor})
+              ::TTY::Editor.open(PARSED_FILE_PATH, command: editor)
             else
               ::TTY::Editor.open(PARSED_FILE_PATH)
             end

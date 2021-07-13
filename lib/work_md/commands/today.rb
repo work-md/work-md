@@ -43,7 +43,7 @@ module WorkMd
             unless editor.nil?
               ::TTY::Editor.open(
                 "#{today.strftime('%Y/%m/%d')}.md",
-                {command: editor}
+                command: editor
               )
             else
               ::TTY::Editor.open("#{today.strftime('%Y/%m/%d')}.md")
