@@ -60,7 +60,7 @@ module WorkMd
                 f.puts("- #{difficulty}\n\n")
               end
               f.puts("---\n\n")
-              f.puts("### #{t[:pomodoros]}:\n\n")
+              f.puts("### #{t[:pomodoros]} (#{parser.average_pomodoros} #{t[:per_day]}):\n\n")
               f.puts(parser.pomodoros)
             end
 

@@ -14,7 +14,8 @@ module WorkMd
           meeting_annotations: 'Anotações de Reunião',
           interruptions: 'Interrupções',
           difficulties: 'Dificuldades',
-          pomodoros: 'Pomodoros'
+          pomodoros: 'Pomodoros / Ciclos',
+          per_day: 'por dia'
         },
       'en' =>
         {
@@ -24,7 +25,8 @@ module WorkMd
           meeting_annotations: 'Meeting Annotations',
           interruptions: 'Interruptions',
           difficulties: 'Difficulties',
-          pomodoros: 'Pomodoros'
+          pomodoros: 'Pomodoros / Cycles',
+          per_day: 'per day'
         }
     }.freeze
 
