@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 module WorkMd
   module Parser
     class Engine
@@ -80,6 +81,14 @@ module WorkMd
         @difficulties ||= @parsed_files.map(&:difficulties).flatten
       end
 
+      def average_pomodoros
+        if @parsed_files.size.positive? && pomodoros.positive?
+          return (pomodoros / @parsed_files.size)
+        end
+
+        0
+      end
+
       def pomodoros
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
@@ -152,3 +161,4 @@ module WorkMd
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

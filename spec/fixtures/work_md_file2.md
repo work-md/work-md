@@ -34,6 +34,6 @@ Some meeting annotation
 
 ---
 
-### Pomodoros:
+### Pomodoros / Cycles:
 
 10
