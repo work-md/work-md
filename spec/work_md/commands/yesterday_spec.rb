@@ -2,18 +2,18 @@
 
 require 'fileutils'
 
-RSpec.describe WorkMd::Commands::Today do
-  let(:today) { DateTime.now }
+RSpec.describe WorkMd::Commands::Yesterday do
+  let(:yesterday) { Date.today.prev_day }
 
   before do
-    allow(DateTime).to receive(:now).and_return(today)
+    allow(Date).to receive(:today).and_return(double(prev_day: yesterday))
   end
 
   after { FileUtils.rm_rf(test_work_dir) }
 
   context 'executing' do
-    let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
-    let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}" }
+    let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{yesterday.strftime('%Y/%m/%d')}.md" }
+    let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{yesterday.strftime('%Y/%m')}" }
 
     it 'creates the md file in the work dir' do
       allow(::TTY::Editor).to(
@@ -62,7 +62,7 @@ RSpec.describe WorkMd::Commands::Today do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md")
+          .with("#{yesterday.strftime('%Y/%m/%d')}.md")
           .and_return(true)
         )
 
@@ -75,7 +75,7 @@ RSpec.describe WorkMd::Commands::Today do
         allow(WorkMd::Config).to(receive(:editor).and_return(editor))
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md", command: editor)
+          .with("#{yesterday.strftime('%Y/%m/%d')}.md", command: editor)
           .and_return(true)
         )
 

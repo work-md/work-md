@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
 module WorkMd
   module Parser
     class Engine
@@ -9,11 +8,10 @@ module WorkMd
 
       class ParsedFile
         attr_accessor :tasks,
-                      :annotations,
-                      :meeting_annotations,
                       :meetings,
                       :interruptions,
                       :difficulties,
+                      :date,
                       :pomodoros
       end
 
@@ -27,7 +25,7 @@ module WorkMd
         raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
         begin
-          file_content = File.read(file)
+          file_content = ::File.read(file)
         rescue Errno::ENOENT
           return
         end
@@ -48,19 +46,6 @@ module WorkMd
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @tasks ||= @parsed_files.map(&:tasks).flatten
-      end
-
-      def annotations
-        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
-
-        @annotations ||= @parsed_files.map(&:annotations).flatten
-      end
-
-      def meeting_annotations
-        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
-
-        @meeting_annotations ||=
-          @parsed_files.map(&:meeting_annotations).flatten
       end
 
       def meetings
@@ -115,18 +100,22 @@ module WorkMd
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
       def parse_content(parsed_file, content)
-        if content.start_with?(@t[:tasks])
-          parsed_file.tasks = parse_task_list(content)
+        if content.start_with?('# ')
+          parsed_file.date =
+            content.split(' - ')[0].gsub('# ', '').gsub("\n\n", '')
+        elsif content.start_with?(@t[:tasks])
+          parsed_file.tasks = parse_check_list(content)
         elsif content.start_with?(@t[:meetings])
-          parsed_file.meetings = parse_list(content)
-        elsif content.start_with?(@t[:meeting_annotations])
-          parsed_file.meeting_annotations = basic_parse(content)
-        elsif content.start_with?(@t[:annotations])
-          parsed_file.annotations = basic_parse(content)
+          parsed_file.meetings = parse_check_list(content)
         elsif content.start_with?(@t[:interruptions])
-          parsed_file.interruptions = parse_list(content)
+          parsed_file.interruptions = parse_list(content).map do |interruption|
+            "(#{parsed_file.date}) #{interruption}"
+          end
         elsif content.start_with?(@t[:difficulties])
-          parsed_file.difficulties = parse_list(content)
+          parsed_file.difficulties = parse_list(content).map do |difficulty|
+            "(#{parsed_file.date}) #{difficulty}"
+          end
+
         elsif content.start_with?(@t[:pomodoros])
           parsed_file.pomodoros = parse_pomodoro(content)
         end
@@ -134,7 +123,7 @@ module WorkMd
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
 
-      def parse_task_list(content)
+      def parse_check_list(content)
         clear_list(basic_parse(content).split('- ['))
       end
 
@@ -161,4 +150,3 @@ module WorkMd
     end
   end
 end
-# rubocop:enable Metrics/ClassLength

@@ -27,9 +27,9 @@ module WorkMd
 
             parser.freeze
 
-            File.delete(PARSED_FILE_PATH) if File.exist? PARSED_FILE_PATH
+            ::File.delete(PARSED_FILE_PATH) if ::File.exist? PARSED_FILE_PATH
 
-            File.open(PARSED_FILE_PATH, 'w+') do |f|
+            ::File.open(PARSED_FILE_PATH, 'w+') do |f|
               f.puts("# #{WorkMd::Config.title}\n\n")
               f.puts("### #{t[:tasks]} (#{parser.tasks.size}):\n\n")
               parser.tasks.each do |task|
@@ -38,16 +38,7 @@ module WorkMd
               f.puts("---\n\n")
               f.puts("### #{t[:meetings]} (#{parser.meetings.size}):\n\n")
               parser.meetings.each do |meeting|
-                f.puts("- #{meeting}\n\n")
-              end
-              f.puts("---\n\n")
-              f.puts("### #{t[:annotations]}:\n\n")
-              parser.annotations.each do |annotation|
-                f.puts("- #{annotation.gsub('###', '')}") unless annotation.nil?
-              end
-              f.puts("###### #{t[:meeting_annotations]}:\n\n")
-              parser.meeting_annotations.each do |meeting_annotation|
-                f.puts("- #{meeting_annotation}\n\n")
+                f.puts("- [#{meeting}\n\n") if meeting != ' ]'
               end
               f.puts("---\n\n")
               f.puts("### #{t[:interruptions]} (#{parser.interruptions.size}):\n\n")
@@ -71,9 +62,11 @@ module WorkMd
             else
               ::TTY::Editor.open(PARSED_FILE_PATH)
             end
-          rescue
+          rescue => e
             WorkMd::Cli.info(
               ::TTY::Box.frame(
+                "message: #{e.message}",
+                "",
                 "Usage examples:",
                 "",
                 "work_md parse -d=1 -m=5 -y=2000 | get day 1 from month 5 and year 2000",

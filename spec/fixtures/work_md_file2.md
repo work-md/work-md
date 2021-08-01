@@ -9,18 +9,10 @@
 
 ### Meetings:
 
-- Meeting
-- Meeting 2
+- [ ] Meeting
+- [x] Meeting 2
 
 ---
-
-### Annotations:
-
-Some annotation
-
-###### Meeting Annotations:
-
-Some meeting annotation
 
 ### Interruptions:
 

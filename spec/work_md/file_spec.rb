@@ -2,18 +2,13 @@
 
 require 'fileutils'
 
-RSpec.describe WorkMd::Commands::Today do
-  let(:today) { DateTime.now }
+RSpec.describe WorkMd::File do
+  context 'open or creating a file' do
+    let(:some_date) { DateTime.now }
 
-  before do
-    allow(DateTime).to receive(:now).and_return(today)
-  end
-
-  after { FileUtils.rm_rf(test_work_dir) }
-
-  context 'executing' do
-    let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
-    let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{today.strftime('%Y/%m')}" }
+    after { FileUtils.rm_rf(test_work_dir) }
+    let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m/%d')}.md" }
+    let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m')}" }
 
     it 'creates the md file in the work dir' do
       allow(::TTY::Editor).to(
@@ -21,7 +16,7 @@ RSpec.describe WorkMd::Commands::Today do
         .and_return(true)
       )
 
-      described_class.execute([])
+      described_class.open_or_create(some_date)
 
       expect(
        ::File
@@ -48,7 +43,7 @@ RSpec.describe WorkMd::Commands::Today do
       ::FileUtils.mkdir_p(expected_md_file_dir)
       ::File.open(expected_md_file, 'w+') { |f| f.puts("test") }
 
-      described_class.execute([])
+      described_class.open_or_create(some_date)
 
       expect(
         ::File
@@ -62,11 +57,11 @@ RSpec.describe WorkMd::Commands::Today do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md")
+          .with("#{some_date.strftime('%Y/%m/%d')}.md")
           .and_return(true)
         )
 
-        described_class.execute([])
+        described_class.open_or_create(some_date)
       end
 
       it 'when editor set' do
@@ -75,11 +70,11 @@ RSpec.describe WorkMd::Commands::Today do
         allow(WorkMd::Config).to(receive(:editor).and_return(editor))
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md", command: editor)
+          .with("#{some_date.strftime('%Y/%m/%d')}.md", command: editor)
           .and_return(true)
         )
 
-        described_class.execute([])
+        described_class.open_or_create(some_date)
       end
     end
   end
