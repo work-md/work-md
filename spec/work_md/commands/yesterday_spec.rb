@@ -34,8 +34,6 @@ RSpec.describe WorkMd::Commands::Yesterday do
       expect(file_content).to match(WorkMd::Config.title)
       expect(file_content).to match(t[:tasks])
       expect(file_content).to match(t[:meetings])
-      expect(file_content).to match(t[:annotations])
-      expect(file_content).to match(t[:meeting_annotations])
       expect(file_content).to match(t[:interruptions])
       expect(file_content).to match(t[:difficulties])
       expect(file_content).to match(t[:pomodoros])

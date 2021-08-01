@@ -10,8 +10,6 @@ module WorkMd
         {
           tasks: 'Atividades',
           meetings: 'Reuniões',
-          annotations: 'Anotações',
-          meeting_annotations: 'Anotações de Reunião',
           interruptions: 'Interrupções',
           difficulties: 'Dificuldades',
           pomodoros: 'Pomodoros / Ciclos',
@@ -21,8 +19,6 @@ module WorkMd
         {
           tasks: 'Tasks',
           meetings: 'Meetings',
-          annotations: 'Annotations',
-          meeting_annotations: 'Meeting Annotations',
           interruptions: 'Interruptions',
           difficulties: 'Difficulties',
           pomodoros: 'Pomodoros / Cycles',

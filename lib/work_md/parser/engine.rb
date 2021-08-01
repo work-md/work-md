@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
 module WorkMd
   module Parser
     class Engine
@@ -9,8 +8,6 @@ module WorkMd
 
       class ParsedFile
         attr_accessor :tasks,
-                      :annotations,
-                      :meeting_annotations,
                       :meetings,
                       :interruptions,
                       :difficulties,
@@ -48,19 +45,6 @@ module WorkMd
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @tasks ||= @parsed_files.map(&:tasks).flatten
-      end
-
-      def annotations
-        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
-
-        @annotations ||= @parsed_files.map(&:annotations).flatten
-      end
-
-      def meeting_annotations
-        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
-
-        @meeting_annotations ||=
-          @parsed_files.map(&:meeting_annotations).flatten
       end
 
       def meetings
@@ -112,17 +96,11 @@ module WorkMd
         parsed_file
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity
       def parse_content(parsed_file, content)
         if content.start_with?(@t[:tasks])
           parsed_file.tasks = parse_check_list(content)
         elsif content.start_with?(@t[:meetings])
           parsed_file.meetings = parse_check_list(content)
-        elsif content.start_with?(@t[:meeting_annotations])
-          parsed_file.meeting_annotations = basic_parse(content)
-        elsif content.start_with?(@t[:annotations])
-          parsed_file.annotations = basic_parse(content)
         elsif content.start_with?(@t[:interruptions])
           parsed_file.interruptions = parse_list(content)
         elsif content.start_with?(@t[:difficulties])
@@ -131,8 +109,6 @@ module WorkMd
           parsed_file.pomodoros = parse_pomodoro(content)
         end
       end
-      # rubocop:enable Metrics/CyclomaticComplexity
-      # rubocop:enable Metrics/PerceivedComplexity
 
       def parse_check_list(content)
         clear_list(basic_parse(content).split('- ['))
@@ -161,4 +137,3 @@ module WorkMd
     end
   end
 end
-# rubocop:enable Metrics/ClassLength

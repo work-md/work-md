@@ -14,14 +14,6 @@
 
 ---
 
-### Annotations:
-
-Some annotation
-
-###### Meeting Annotations:
-
-Some meeting annotation
-
 ### Interruptions:
 
 - Some interruption

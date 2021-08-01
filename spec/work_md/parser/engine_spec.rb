@@ -11,8 +11,6 @@ RSpec.describe WorkMd::Parser::Engine do
 
         expect(parser.tasks).to eq([])
         expect(parser.meetings).to eq([])
-        expect(parser.annotations).to eq([])
-        expect(parser.meeting_annotations).to eq([])
         expect(parser.interruptions).to eq([])
         expect(parser.difficulties).to eq([])
         expect(parser.pomodoros).to eq(0)
@@ -55,8 +53,6 @@ RSpec.describe WorkMd::Parser::Engine do
 
         expect(parser.tasks).to eq(["] Do something", "x] Do something 2", "] Do something", "x] Do something 2"])
         expect(parser.meetings).to eq(["] Meeting", "x] Meeting 2", "] Meeting", "x] Meeting 2"])
-        expect(parser.annotations).to eq(["Some annotation\n\n###", "Some annotation\n\n###"])
-        expect(parser.meeting_annotations).to eq(["Some meeting annotation\n\n", "Some meeting annotation\n\n"])
         expect(parser.interruptions).to eq(["Some interruption", "Some interruption"])
         expect(parser.difficulties).to eq(["Some difficulty", "Some difficulty"])
         expect(parser.pomodoros).to eq(14)

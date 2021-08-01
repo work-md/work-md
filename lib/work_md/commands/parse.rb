@@ -38,16 +38,7 @@ module WorkMd
               f.puts("---\n\n")
               f.puts("### #{t[:meetings]} (#{parser.meetings.size}):\n\n")
               parser.meetings.each do |meeting|
-                f.puts("- #{meeting}\n\n")
-              end
-              f.puts("---\n\n")
-              f.puts("### #{t[:annotations]}:\n\n")
-              parser.annotations.each do |annotation|
-                f.puts("- #{annotation.gsub('###', '')}") unless annotation.nil?
-              end
-              f.puts("###### #{t[:meeting_annotations]}:\n\n")
-              parser.meeting_annotations.each do |meeting_annotation|
-                f.puts("- #{meeting_annotation}\n\n")
+                f.puts("- [#{meeting}\n\n") if meeting != ' ]'
               end
               f.puts("---\n\n")
               f.puts("### #{t[:interruptions]} (#{parser.interruptions.size}):\n\n")
