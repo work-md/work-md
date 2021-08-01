@@ -54,7 +54,7 @@ RSpec.describe WorkMd::Parser::Engine do
         parser.freeze
 
         expect(parser.tasks).to eq(["] Do something", "x] Do something 2", "] Do something", "x] Do something 2"])
-        expect(parser.meetings).to eq(["Meeting", "Meeting 2", "Meeting", "Meeting 2"])
+        expect(parser.meetings).to eq(["] Meeting", "x] Meeting 2", "] Meeting", "x] Meeting 2"])
         expect(parser.annotations).to eq(["Some annotation\n\n###", "Some annotation\n\n###"])
         expect(parser.meeting_annotations).to eq(["Some meeting annotation\n\n", "Some meeting annotation\n\n"])
         expect(parser.interruptions).to eq(["Some interruption", "Some interruption"])

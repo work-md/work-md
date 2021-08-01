@@ -27,9 +27,9 @@ module WorkMd
 
             parser.freeze
 
-            File.delete(PARSED_FILE_PATH) if File.exist? PARSED_FILE_PATH
+            ::File.delete(PARSED_FILE_PATH) if ::File.exist? PARSED_FILE_PATH
 
-            File.open(PARSED_FILE_PATH, 'w+') do |f|
+            ::File.open(PARSED_FILE_PATH, 'w+') do |f|
               f.puts("# #{WorkMd::Config.title}\n\n")
               f.puts("### #{t[:tasks]} (#{parser.tasks.size}):\n\n")
               parser.tasks.each do |task|
@@ -71,9 +71,11 @@ module WorkMd
             else
               ::TTY::Editor.open(PARSED_FILE_PATH)
             end
-          rescue
+          rescue => e
             WorkMd::Cli.info(
               ::TTY::Box.frame(
+                "message: #{e.message}",
+                "",
                 "Usage examples:",
                 "",
                 "work_md parse -d=1 -m=5 -y=2000 | get day 1 from month 5 and year 2000",

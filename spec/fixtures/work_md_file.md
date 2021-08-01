@@ -9,8 +9,8 @@
 
 ### Meetings:
 
-- Meeting
-- Meeting 2
+- [ ] Meeting
+- [x] Meeting 2
 
 ---
 

@@ -2,10 +2,10 @@
 
 module WorkMd
   module Commands
-    class Today
+    class Yesterday
       class << self
         def execute(_argv = [])
-          WorkMd::File.open_or_create(DateTime.now)
+          WorkMd::File.open_or_create(Date.today.prev_day)
         end
       end
     end

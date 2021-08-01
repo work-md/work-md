@@ -27,7 +27,7 @@ module WorkMd
         raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
         begin
-          file_content = File.read(file)
+          file_content = ::File.read(file)
         rescue Errno::ENOENT
           return
         end
@@ -116,9 +116,9 @@ module WorkMd
       # rubocop:disable Metrics/PerceivedComplexity
       def parse_content(parsed_file, content)
         if content.start_with?(@t[:tasks])
-          parsed_file.tasks = parse_task_list(content)
+          parsed_file.tasks = parse_check_list(content)
         elsif content.start_with?(@t[:meetings])
-          parsed_file.meetings = parse_list(content)
+          parsed_file.meetings = parse_check_list(content)
         elsif content.start_with?(@t[:meeting_annotations])
           parsed_file.meeting_annotations = basic_parse(content)
         elsif content.start_with?(@t[:annotations])
@@ -134,7 +134,7 @@ module WorkMd
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
 
-      def parse_task_list(content)
+      def parse_check_list(content)
         clear_list(basic_parse(content).split('- ['))
       end
 

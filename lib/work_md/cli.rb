@@ -7,6 +7,7 @@ module WorkMd
     ALIAS_COMMANDS =
       {
         't' => 'today',
+        'y' => 'yesterday',
         'p' => 'parse'
       }.freeze
 
@@ -44,6 +45,7 @@ module WorkMd
         '',
         '- work_md',
         '- work_md today',
+        '- work_md yesterday',
         '- work_md parse',
         '',
         'read more in github.com/henriquefernandez/work_md',

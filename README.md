@@ -23,6 +23,10 @@ You can also set the editor directly in the command call:
 
     $ EDITOR=[YOUR_FAVORITE_EDITOR] work_md
 
+### Open or create a new work markdown file for yesterday:
+
+    $ work_md yesterday
+
 ### Parse your work markdown files:
 
 Day 1 from month 5 and year 2000:
@@ -55,8 +59,9 @@ lang: pt # Your language (only pt and en available)
 
 `work_md today`-> `work_md t` or just `work_md`
 
-`work_md parse`-> `work_md p`
+`work_md yesterday`-> `work_md y`
 
+`work_md parse`-> `work_md p`
 
 ## Development
 
