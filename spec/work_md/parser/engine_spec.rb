@@ -53,8 +53,8 @@ RSpec.describe WorkMd::Parser::Engine do
 
         expect(parser.tasks).to eq(["] Do something", "x] Do something 2", "] Do something", "x] Do something 2"])
         expect(parser.meetings).to eq(["] Meeting", "x] Meeting 2", "] Meeting", "x] Meeting 2"])
-        expect(parser.interruptions).to eq(["Some interruption", "Some interruption"])
-        expect(parser.difficulties).to eq(["Some difficulty", "Some difficulty"])
+        expect(parser.interruptions).to eq(["(00/00/0000) Some interruption", "(00/00/0000) Some interruption"])
+        expect(parser.difficulties).to eq(["(00/00/0000) Some difficulty", "(00/00/0000) Some difficulty"])
         expect(parser.pomodoros).to eq(14)
         expect(parser.average_pomodoros).to eq(7)
       end

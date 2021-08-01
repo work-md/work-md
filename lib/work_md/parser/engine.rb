@@ -11,6 +11,7 @@ module WorkMd
                       :meetings,
                       :interruptions,
                       :difficulties,
+                      :date,
                       :pomodoros
       end
 
@@ -96,19 +97,31 @@ module WorkMd
         parsed_file
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
       def parse_content(parsed_file, content)
-        if content.start_with?(@t[:tasks])
+        if content.start_with?('# ')
+          parsed_file.date =
+            content.split(' - ')[0].gsub('# ', '').gsub("\n\n", '')
+        elsif content.start_with?(@t[:tasks])
           parsed_file.tasks = parse_check_list(content)
         elsif content.start_with?(@t[:meetings])
           parsed_file.meetings = parse_check_list(content)
         elsif content.start_with?(@t[:interruptions])
-          parsed_file.interruptions = parse_list(content)
+          parsed_file.interruptions = parse_list(content).map do |interruption|
+            "(#{parsed_file.date}) #{interruption}"
+          end
         elsif content.start_with?(@t[:difficulties])
-          parsed_file.difficulties = parse_list(content)
+          parsed_file.difficulties = parse_list(content).map do |difficulty|
+            "(#{parsed_file.date}) #{difficulty}"
+          end
+
         elsif content.start_with?(@t[:pomodoros])
           parsed_file.pomodoros = parse_pomodoro(content)
         end
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def parse_check_list(content)
         clear_list(basic_parse(content).split('- ['))

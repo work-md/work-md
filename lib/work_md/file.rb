@@ -13,7 +13,9 @@ module WorkMd
           "#{work_dir}/#{some_date.strftime('%Y/%m/%d')}.md",
           'w+'
         ) do |f|
+          # rubocop:disable Layout/LineLength
           f.puts("# #{some_date.strftime('%d/%m/%Y')} - #{WorkMd::Config.title} \n\n")
+          # rubocop:enable Layout/LineLength
           f.puts("### #{t[:tasks]}:\n\n")
           f.puts("- [ ]\n\n")
           f.puts("---\n\n")
