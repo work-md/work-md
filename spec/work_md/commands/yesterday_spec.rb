@@ -9,7 +9,10 @@ RSpec.describe WorkMd::Commands::Yesterday do
     allow(Date).to receive(:today).and_return(double(prev_day: yesterday))
   end
 
-  after { FileUtils.rm_rf(test_work_dir) }
+  after do
+    FileUtils.rm_rf(test_work_dir)
+    ENV['EDITOR'] = nil
+  end
 
   context 'executing' do
     let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{yesterday.strftime('%Y/%m/%d')}.md" }
@@ -62,24 +65,36 @@ RSpec.describe WorkMd::Commands::Yesterday do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{yesterday.strftime('%Y/%m/%d')}.md", {})
+          .with("#{yesterday.strftime('%Y/%m/%d')}.md")
           .and_return(true)
         )
 
         described_class.execute([])
       end
 
-      it 'when editor set' do
-        editor = "vim"
+      context 'when editor set' do
+        let(:editor) { "vim" }
 
-        allow(WorkMd::Config).to(receive(:editor).and_return(editor))
-        allow(::TTY::Editor).to(
-          receive(:open)
-          .with("#{yesterday.strftime('%Y/%m/%d')}.md", command: editor)
-          .and_return(true)
-        )
+        before do
+          allow(WorkMd::Config).to(receive(:editor).and_return(editor))
+          allow(::TTY::Editor).to(
+            receive(:open)
+            .with("#{yesterday.strftime('%Y/%m/%d')}.md")
+            .and_return(true)
+          )
+          ENV['EDITOR'] = nil
+        end
 
-        described_class.execute([])
+        it do
+          expect(WorkMd::Config).to(receive(:editor).and_return(editor))
+          expect(::TTY::Editor).to(
+            receive(:open)
+            .with("#{yesterday.strftime('%Y/%m/%d')}.md")
+          )
+
+          described_class.execute([])
+          expect(ENV['EDITOR']).to eq(editor)
+        end
       end
     end
   end

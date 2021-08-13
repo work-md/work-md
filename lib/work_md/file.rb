@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 module WorkMd
   class File
     def self.open_or_create(some_date)
@@ -47,12 +49,11 @@ module WorkMd
       editor = WorkMd::Config.editor
 
       ::FileUtils.cd(WorkMd::Config.work_dir) do
-        config = {}
-        config = { command: editor } unless editor.nil?
+        ENV['EDITOR'] = editor unless editor.nil?
 
-        return ::TTY::Editor.open(filename1, config) if filename2.nil?
+        return ::TTY::Editor.open(filename1) if filename2.nil?
 
-        ::TTY::Editor.open(filename1, filename2, config)
+        ::TTY::Editor.open(filename1, filename2)
       end
     end
   end
