@@ -11,6 +11,7 @@ module WorkMd
                       :meetings,
                       :interruptions,
                       :difficulties,
+                      :observations,
                       :date,
                       :pomodoros
       end
@@ -66,6 +67,12 @@ module WorkMd
         @difficulties ||= @parsed_files.map(&:difficulties).flatten
       end
 
+      def observations
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
+
+        @observations ||= @parsed_files.map(&:observations).flatten
+      end
+
       def average_pomodoros
         if @parsed_files.size.positive? && pomodoros.positive?
           return (pomodoros / @parsed_files.size)
@@ -115,7 +122,10 @@ module WorkMd
           parsed_file.difficulties = parse_list(content).map do |difficulty|
             "(#{parsed_file.date}) #{difficulty}"
           end
-
+        elsif content.start_with?(@t[:observations])
+          parsed_file.observations = parse_list(content).map do |observations|
+            "(#{parsed_file.date}) #{observations}"
+          end
         elsif content.start_with?(@t[:pomodoros])
           parsed_file.pomodoros = parse_pomodoro(content)
         end

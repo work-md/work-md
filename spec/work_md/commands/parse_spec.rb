@@ -49,6 +49,7 @@ RSpec.describe WorkMd::Commands::Parse do
       expect(file_content).to match(t[:meetings])
       expect(file_content).to match(t[:interruptions])
       expect(file_content).to match(t[:difficulties])
+      expect(file_content).to match(t[:observations])
       expect(file_content).to match(t[:pomodoros])
       expect(file_content).to match(/\b2\b/)
       expect(file_content).to match(/\b1\b/)

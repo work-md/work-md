@@ -16,6 +16,21 @@ module WorkMd
             month = args['m'] || Time.new.month
 
             month = "0#{month.to_i}" if month.to_i < 10
+            #add_file_to_parser = ->(day) do
+              #day = "0#{day.to_i}" if day.to_i < 10
+
+              #file_name = WorkMd::Config.work_dir + "/#{year}/#{month}/#{day}.md"
+
+              #parser.add_file(file_name)
+            #end
+
+            #if args['d'].match('..')
+              #range = args['d'].split('..')
+
+              #(range[0].to_i..range[1].to_i).each { |day| add_file_to_parser.(day) }
+            #elsif
+              #args['d'].split(',').each { |day| add_file_to_parser.(day) }
+            #end
 
             args['d'].split(',').each do |day|
               day = "0#{day.to_i}" if day.to_i < 10
@@ -49,6 +64,11 @@ module WorkMd
               f.puts("### #{t[:difficulties]} (#{parser.difficulties.size}):\n\n")
               parser.difficulties.each do |difficulty|
                 f.puts("- #{difficulty}\n\n")
+              end
+              f.puts("---\n\n")
+              f.puts("### #{t[:observations]} (#{parser.observations.size}):\n\n")
+              parser.observations.each do |observation|
+                f.puts("- #{observation}\n\n")
               end
               f.puts("---\n\n")
               f.puts("### #{t[:pomodoros]} (#{parser.average_pomodoros} #{t[:per_day]}):\n\n")

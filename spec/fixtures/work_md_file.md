@@ -26,6 +26,12 @@
 
 ---
 
+### Observations:
+
+- Some observation
+
+---
+
 ### Pomodoros / Cycles:
 
 4
