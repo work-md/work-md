@@ -75,18 +75,27 @@ module WorkMd
       end
 
       def average_pomodoros
-        if @parsed_files.size.positive? && pomodoros.positive?
-          return (pomodoros.to_f / @parsed_files.size).round(1)
+        if @parsed_files.size.positive? && pomodoros_sum.positive?
+          return (pomodoros_sum.to_f / @parsed_files.size).round(1)
         end
 
         0
       end
 
-      def pomodoros
+      def pomodoros_sum
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
-        @pomodoros ||=
+        @pomodoros_sum ||=
           @parsed_files.reduce(0) { |sum, f| sum + f.pomodoros || 0 }
+      end
+
+      def pomodoros_bars
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
+
+        @pomodoros_bars ||=
+          @parsed_files.map do |f|
+            "(#{f.date}) #{(1..f.pomodoros).map { '◘' }.join }"
+          end
       end
 
       def freeze
