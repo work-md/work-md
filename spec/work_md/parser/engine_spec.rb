@@ -57,8 +57,8 @@ RSpec.describe WorkMd::Parser::Engine do
         expect(parser.interruptions).to eq(["(00/00/0000) Some interruption", "(00/00/0000) Some interruption"])
         expect(parser.difficulties).to eq(["(00/00/0000) Some difficulty", "(00/00/0000) Some difficulty"])
         expect(parser.observations).to eq(["(00/00/0000) Some observation", "(00/00/0000) Some observation"])
-        expect(parser.pomodoros).to eq(14)
-        expect(parser.average_pomodoros).to eq(7)
+        expect(parser.pomodoros).to eq(13)
+        expect(parser.average_pomodoros).to eq(6.5)
       end
     end
   end

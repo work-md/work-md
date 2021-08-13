@@ -27,6 +27,10 @@ You can also set the editor directly in the command call:
 
     $ work_md yesterday
 
+### Open or create a new work markdown file for today and yesterday at same time:
+
+    $ work_md tyesterday
+
 ### Parse your work markdown files:
 
 Day 1 from month 5 and year 2000:
@@ -40,6 +44,10 @@ Day 1, 2 and 3 from the current month and year:
 Day 1 and 2 from month 4 and current year:
 
     $ work_md parse -d=1,2 -m=4    
+
+Day 1 to 25 from month 2 and current year:
+
+    $ work_md parse -d=1..25 -m=2    
 
 ### Configure your preferences:
 
@@ -60,6 +68,8 @@ lang: pt # Your language (only pt and en available)
 `work_md today`-> `work_md t` or just `work_md`
 
 `work_md yesterday`-> `work_md y`
+
+`work_md tyesterday`-> `work_md ty`
 
 `work_md parse`-> `work_md p`
 
