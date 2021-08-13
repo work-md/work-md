@@ -31,6 +31,7 @@ RSpec.describe WorkMd::File do
       expect(file_content).to match(t[:meetings])
       expect(file_content).to match(t[:interruptions])
       expect(file_content).to match(t[:difficulties])
+      expect(file_content).to match(t[:observations])
       expect(file_content).to match(t[:pomodoros])
     end
 

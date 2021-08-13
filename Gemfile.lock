@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    work_md (0.2.6)
+    work_md (0.2.7)
       tty-box (~> 0.7.0)
       tty-editor (~> 0.7.0)
 

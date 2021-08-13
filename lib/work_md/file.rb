@@ -26,6 +26,8 @@ module WorkMd
           f.puts("---\n\n")
           f.puts("### #{t[:difficulties]}:\n\n")
           f.puts("---\n\n")
+          f.puts("### #{t[:observations]}:\n\n")
+          f.puts("---\n\n")
           f.puts("### #{t[:pomodoros]}:\n\n")
           f.puts("0\n\n")
         end

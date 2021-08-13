@@ -12,6 +12,7 @@ module WorkMd
           meetings: 'Reuniões',
           interruptions: 'Interrupções',
           difficulties: 'Dificuldades',
+          observations: 'Observações',
           pomodoros: 'Pomodoros / Ciclos',
           per_day: 'por dia'
         },
@@ -21,6 +22,7 @@ module WorkMd
           meetings: 'Meetings',
           interruptions: 'Interruptions',
           difficulties: 'Difficulties',
+          observations: 'Observations',
           pomodoros: 'Pomodoros / Cycles',
           per_day: 'per day'
         }
