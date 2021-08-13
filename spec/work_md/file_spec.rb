@@ -58,7 +58,7 @@ RSpec.describe WorkMd::File do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{some_date.strftime('%Y/%m/%d')}.md")
+          .with("#{some_date.strftime('%Y/%m/%d')}.md", {})
           .and_return(true)
         )
 

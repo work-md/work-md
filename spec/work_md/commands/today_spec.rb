@@ -62,7 +62,7 @@ RSpec.describe WorkMd::Commands::Today do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with("#{today.strftime('%Y/%m/%d')}.md")
+          .with("#{today.strftime('%Y/%m/%d')}.md", {})
           .and_return(true)
         )
 
