@@ -6,7 +6,11 @@ RSpec.describe WorkMd::File do
   context 'open or creating a file' do
     let(:some_date) { DateTime.now }
 
-    after { FileUtils.rm_rf(test_work_dir) }
+    after do
+      FileUtils.rm_rf(test_work_dir)
+      ENV['EDITOR'] = nil
+    end
+
     let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m/%d')}.md" }
     let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m')}" }
 
@@ -55,27 +59,70 @@ RSpec.describe WorkMd::File do
     end
 
     context 'opening the md file in the work dir' do
-      it 'when editor not set' do
-        allow(::TTY::Editor).to(
-          receive(:open)
-          .with("#{some_date.strftime('%Y/%m/%d')}.md")
-          .and_return(true)
-        )
+      context 'when oppening many files' do
+        let(:file_name) { described_class.create_if_not_exist(some_date) }
 
-        described_class.open_or_create(some_date)
+        before do
+          allow(::TTY::Editor).to(
+            receive(:open)
+            .with(file_name, file_name)
+            .and_return(true)
+          )
+
+          described_class.create_if_not_exist(some_date)
+        end
+
+        it do
+          expect(::TTY::Editor).to(
+            receive(:open)
+            .with(file_name, file_name)
+          )
+          described_class.open_in_editor(file_name, file_name)
+        end
       end
 
-      it 'when editor set' do
-        editor = "vim"
+      context 'when editor not set' do
+        before do
+          allow(::TTY::Editor).to(
+            receive(:open)
+            .with("#{some_date.strftime('%Y/%m/%d')}.md")
+            .and_return(true)
+          )
+        end
 
-        allow(WorkMd::Config).to(receive(:editor).and_return(editor))
-        allow(::TTY::Editor).to(
-          receive(:open)
-          .with("#{some_date.strftime('%Y/%m/%d')}.md", command: editor)
-          .and_return(true)
-        )
+        it do
+          expect(::TTY::Editor).to(
+            receive(:open)
+            .with("#{some_date.strftime('%Y/%m/%d')}.md")
+          )
 
-        described_class.open_or_create(some_date)
+          described_class.open_or_create(some_date)
+        end
+      end
+
+      context 'when editor set' do
+        let(:editor) { "vim" }
+
+        before do
+          allow(WorkMd::Config).to(receive(:editor).and_return(editor))
+          allow(::TTY::Editor).to(
+            receive(:open)
+            .with("#{some_date.strftime('%Y/%m/%d')}.md")
+            .and_return(true)
+          )
+          ENV['EDITOR'] = nil
+        end
+
+        it do
+          expect(WorkMd::Config).to(receive(:editor).and_return(editor))
+          expect(::TTY::Editor).to(
+            receive(:open)
+            .with("#{some_date.strftime('%Y/%m/%d')}.md")
+          )
+
+          described_class.open_or_create(some_date)
+          expect(ENV['EDITOR']).to eq(editor)
+        end
       end
     end
   end
