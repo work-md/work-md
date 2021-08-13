@@ -5,8 +5,10 @@ module WorkMd
     class Tyesterday
       class << self
         def execute(_argv = [])
-          WorkMd::File.open_or_create(DateTime.now)
-          WorkMd::File.open_or_create(Date.today.prev_day)
+          [DateTime.now, Date.today.prev_day].each do |date|
+            WorkMd::File.create_if_not_exist(date)
+            WorkMd::File.open_in_editor(date)
+          end
         end
       end
     end
