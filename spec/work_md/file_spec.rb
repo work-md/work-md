@@ -77,7 +77,7 @@ RSpec.describe WorkMd::File do
             receive(:open)
             .with(file_name, file_name)
           )
-          described_class.open_in_editor(file_name, file_name)
+          described_class.open_in_editor(file_names: [file_name, file_name])
         end
       end
 

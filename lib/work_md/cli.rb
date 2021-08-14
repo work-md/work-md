@@ -9,10 +9,9 @@ module WorkMd
         't' => 'today',
         'ty' => 'tyesterday',
         'y' => 'yesterday',
+        'c' => 'config',
         'p' => 'parse'
       }.freeze
-
-    DEFAULT_COMMAND = WorkMd::Commands::Today
 
     def self.execute(argv)
       first_argv_argument = argv.shift
@@ -26,17 +25,17 @@ module WorkMd
         .const_get("WorkMd::Commands::#{command}")
         .send(:execute, argv)
     rescue NameError
-      puts info(
+      puts help(
         ::TTY::Box.frame(
           "Command '#{first_argv_argument}' not found!",
           **error_frame_style
         )
       )
     rescue CommandMissing
-      DEFAULT_COMMAND.execute(argv)
+      help('Welcome! =)')
     end
 
-    def self.info(message = '')
+    def self.help(message = '')
       # rubocop:disable Layout/LineLength
       puts ::TTY::Box.frame(
         message,
@@ -49,8 +48,9 @@ module WorkMd
         '- work_md yesterday',
         '- work_md tyesterday',
         '- work_md parse',
+        '- work_md config',
         '',
-        'read more in github.com/henriquefernandez/work_md',
+        'more information in github.com/henriquefernandez/work_md',
         padding: 1,
         title: { top_left: '(work_md)', bottom_right: "(v#{WorkMd::VERSION})" }
       )

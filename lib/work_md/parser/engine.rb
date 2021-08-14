@@ -94,7 +94,7 @@ module WorkMd
 
         @pomodoros_bars ||=
           @parsed_files.map do |f|
-            "(#{f.date}) #{(1..f.pomodoros).map { '◘' }.join }"
+            "(#{f.date}) #{(1..f.pomodoros).map { '◘' }.join}"
           end
       end
 
