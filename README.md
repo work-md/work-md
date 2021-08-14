@@ -1,6 +1,6 @@
 ![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo-resized.png)
 
-![](https://img.shields.io/gem/dt/work_md?color=%23b40303&style=flat-square)
+![](https://img.shields.io/gem/v/work_md?style=social)
 
 Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!
 
