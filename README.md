@@ -1,4 +1,4 @@
-![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo.png)
+![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo-resized.png)
 
 ![](https://img.shields.io/gem/dt/work_md?color=%23b40303&style=flat-square)
 
