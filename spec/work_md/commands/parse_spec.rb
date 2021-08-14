@@ -34,6 +34,10 @@ RSpec.describe WorkMd::Commands::Parse do
         receive(:open)
         .and_return(true)
       )
+      expect(::TTY::Editor).to(
+        receive(:open)
+        .and_return(true)
+      )
 
       described_class.execute(["-d=#{today.strftime('%d')}"])
 

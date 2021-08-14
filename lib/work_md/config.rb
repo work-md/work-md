@@ -4,7 +4,7 @@ require 'yaml'
 
 module WorkMd
   module Config
-    DEFAULT_WORK_DIR = Dir.home + '/work_md'
+    DEFAULT_WORK_DIR = "#{Dir.home}/work_md"
     TRANSLATIONS = {
       'pt' =>
         {
@@ -25,7 +25,18 @@ module WorkMd
           observations: 'Observations',
           pomodoros: 'Pomodoros / Cycles',
           per_day: 'per day'
+        },
+      'es' =>
+        {
+          tasks: 'Tareas',
+          meetings: 'Reuniones',
+          interruptions: 'Interrupciones',
+          difficulties: 'Dificultades',
+          observations: 'Observaciones',
+          pomodoros: 'Pomodoros / Ciclos',
+          per_day: 'por día'
         }
+
     }.freeze
 
     def self.title
@@ -47,7 +58,7 @@ module WorkMd
     end
 
     def self.yaml_file
-      YAML.load_file(DEFAULT_WORK_DIR + '/config.yml')
+      YAML.load_file("#{DEFAULT_WORK_DIR}/config.yml")
     rescue StandardError
       {}
     end

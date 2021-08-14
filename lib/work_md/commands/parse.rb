@@ -83,7 +83,7 @@ module WorkMd
               ::TTY::Editor.open(PARSED_FILE_PATH)
             end
           rescue => e
-            WorkMd::Cli.info(
+            WorkMd::Cli.help(
               ::TTY::Box.frame(
                 "message: #{e.message}",
                 "",

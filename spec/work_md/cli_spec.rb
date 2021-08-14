@@ -24,13 +24,13 @@ RSpec.describe WorkMd::Cli do
     end
   end
 
-  describe "using info" do
-    it "outputs info message" do
+  describe "using help" do
+    it "outputs help message" do
       message = "some message"
 
-      expect { WorkMd::Cli.info(message) }
+      expect { WorkMd::Cli.help(message) }
         .to output(/Track your work activities, write annotations/).to_stdout
-      expect { WorkMd::Cli.info(message) }
+      expect { WorkMd::Cli.help(message) }
         .to output(/#{message}/).to_stdout
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe WorkMd::Cli do
     it "executes the default command" do
       argv = []
 
-      expect(WorkMd::Cli::DEFAULT_COMMAND).to(receive(:execute).with([]))
+      expect(WorkMd::Cli).to(receive(:help).with('Welcome! =)'))
 
       WorkMd::Cli.execute(argv)
     end

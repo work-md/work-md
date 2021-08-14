@@ -23,6 +23,10 @@ RSpec.describe WorkMd::Commands::Today do
         receive(:open)
         .and_return(true)
       )
+      expect(::TTY::Editor).to(
+        receive(:open)
+        .and_return(true)
+      )
 
       described_class.execute([])
 

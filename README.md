@@ -1,19 +1,20 @@
-# work_md
+![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo.png)
+
+![](https://img.shields.io/gem/dt/work_md?color=%23b40303&style=flat-square)
 
 Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!
 
 ## Installation
 
-**Ruby > 2.3** must be installed in your machine, then install `work_md` yourself as:
+*Ruby (>= 2.3)* must be installed in your machine, then install `work_md` with:
 
     $ gem install work_md
-
 
 ## Usage
 
 ### Open or create a new work markdown file for today:
 
-    $ work_md
+    $ work_md t
 
 By default, a work markdown file live in `[YOUR_HOME_DIRECTORY]/work_md/[YEAR]/[MONTH]/[DAY].md`
 
@@ -25,53 +26,55 @@ You can also set the editor directly in the command call:
 
 ### Open or create a new work markdown file for yesterday:
 
-    $ work_md yesterday
+    $ work_md y
 
 ### Open or create a new work markdown file for today and yesterday at same time:
 
-    $ work_md tyesterday
+    $ work_md ty
 
 ### Parse your work markdown files:
 
 Day 1 from month 5 and year 2000:
 
-    $ work_md parse -d=1 -m=5 -y=2000
+    $ work_md p -d=1 -m=5 -y=2000
 
 Day 1, 2 and 3 from the current month and year:
              
-    $ work_md parse -d=1,2,3
+    $ work_md p -d=1,2,3
 
 Day 1 and 2 from month 4 and current year:
 
-    $ work_md parse -d=1,2 -m=4    
+    $ work_md p -d=1,2 -m=4    
 
 Day 1 to 25 from month 2 and current year:
 
-    $ work_md parse -d=1..25 -m=2    
+    $ work_md p -d=1..25 -m=2    
 
 ### Configure your preferences:
 
-Create a `config.yml` file in `[YOUR_HOME_DIRECTORY]/work_md`:
+    $ work_md c
 
-    $ touch ~/work_md/config.yml
-    
-Copy and paste the yaml bellow in your config.yml:
+This command creates a `config.yml` file in `[YOUR_HOME_DIRECTORY]/work_md` (or open, if the file already exists)
+
+We can configure `work_md` behaviour adding values in the created file, example:
 
 ```yaml
-title: Henrique F. Teixeira # Title of your files
+title: Your Name # Title your files
 editor: gedit # Your default editor
-lang: pt # Your language (only pt and en available)
+lang: pt # Your language ('pt', 'en' and 'es' available)
 ```
 
 ### Aliases:
 
-`work_md today`-> `work_md t` or just `work_md`
+`work_md t`-> `work_md today`
 
-`work_md yesterday`-> `work_md y`
+`work_md y`-> `work_md yesterday`
 
-`work_md tyesterday`-> `work_md ty`
+`work_md ty`-> `work_md tyesterday`
 
-`work_md parse`-> `work_md p`
+`work_md p`-> `work_md parse`
+
+`work_md c`-> `work_md config`
 
 ## Development
 
