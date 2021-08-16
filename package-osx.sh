@@ -27,13 +27,6 @@ chmod +x work_md-0.3.1-osx/work_md
 rm -r vendor
 rm packaging/Gemfile.lock
 
-#cp packaging/wrapper.sh hello-1.0.0-linux-x86/hello
-#cp packaging/wrapper.sh hello-1.0.0-linux-x86_64/hello
-#cp packaging/wrapper.sh hello-1.0.0-osx/hello
-
-#tar -czf hello-1.0.0-linux-x86.tar.gz hello-1.0.0-linux-x86
-#tar -czf hello-1.0.0-linux-x86_64.tar.gz hello-1.0.0-linux-x86_64
-#tar -czf hello-1.0.0-osx.tar.gz hello-1.0.0-osx
-#rm -rf hello-1.0.0-linux-x86
-#rm -rf hello-1.0.0-linux-x86_64
-#rm -rf hello-1.0.0-osx
+# package
+tar -czf work_md-0.3.1-osx.tar.gz work_md-0.3.1-osx
+rm -rf work_md-0.3.1-osx
