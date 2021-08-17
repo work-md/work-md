@@ -41,7 +41,7 @@ module WorkMd
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @done_tasks ||=
-          tasks.filter { |t| t.start_with?('x]') || t.start_with?('X]') }
+          tasks.select { |t| t.start_with?('x]') || t.start_with?('X]') }
       end
 
       def tasks
@@ -164,7 +164,7 @@ module WorkMd
 
         list
           .map { |s| s.gsub('---', '') unless s.nil? }
-          .filter { |s| (s != '') && (s != "\n\n") }
+          .select { |s| (s != '') && (s != "\n\n") }
           .map(&:strip)
       end
     end
