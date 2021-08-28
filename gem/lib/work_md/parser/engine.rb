@@ -89,12 +89,30 @@ module WorkMd
           @parsed_files.reduce(0) { |sum, f| sum + f.pomodoros || 0 }
       end
 
-      def pomodoros_bars
+      def pomodoros_bars(file = nil)
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @pomodoros_bars ||=
           @parsed_files.map do |f|
-            "(#{f.date}) #{(1..f.pomodoros).map { '◘' }.join}"
+            "(#{f.date}) #{(1..f.pomodoros).map { '⚫' }.join}"
+          end
+      end
+
+      def days_bars
+        raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
+
+        return @days_bars if @days_bars
+
+        @days_bars ||=
+          @parsed_files.map do |f|
+            pom = (1..f.pomodoros).map { '⚫' }.join
+            mee = f.meetings.map { '🟪' }.join
+            int = f.interruptions.map { '🟨' }.join
+            dif = f.difficulties.map { '🟥' }.join
+            obs = f.observations.map { 'o' }.join
+            tas = f.tasks.map { '⬜' }.join
+
+            "(#{f.date})\n\n#{pom}\n#{mee}\n#{int}\n#{dif}\n#{obs}\n#{tas}"
           end
       end
 

@@ -14,7 +14,8 @@ module WorkMd
           difficulties: 'Dificuldades',
           observations: 'Observações',
           pomodoros: 'Pomodoros / Ciclos',
-          per_day: 'por dia'
+          per_day: 'por dia',
+          days_bars: 'Gráficos'
         },
       'en' =>
         {
@@ -24,7 +25,9 @@ module WorkMd
           difficulties: 'Difficulties',
           observations: 'Observations',
           pomodoros: 'Pomodoros / Cycles',
-          per_day: 'per day'
+          per_day: 'per day',
+          days_bars: 'Gráficos'
+
         },
       'es' =>
         {
@@ -34,7 +37,8 @@ module WorkMd
           difficulties: 'Dificultades',
           observations: 'Observaciones',
           pomodoros: 'Pomodoros / Ciclos',
-          per_day: 'por día'
+          per_day: 'por día',
+          days_bars: 'Gráficos'
         }
 
     }.freeze

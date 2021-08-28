@@ -67,11 +67,17 @@ module WorkMd
               f.puts("### #{t[:pomodoros]} (#{parser.average_pomodoros} #{t[:per_day]}):\n\n")
               f.puts(parser.pomodoros_sum)
               f.puts("\n\n")
-
               parser.pomodoros_bars.each do |pomodoro_bar|
                 f.puts(pomodoro_bar)
                 f.puts("\n\n")
               end
+              f.puts("---\n\n")
+              f.puts("### #{t[:days_bars]}:\n\n")
+              parser.days_bars.each do |day_bar|
+                f.puts(day_bar)
+                f.puts("\n\n")
+              end
+
               f.puts("\n\n")
             end
 
