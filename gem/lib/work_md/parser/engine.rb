@@ -94,7 +94,7 @@ module WorkMd
 
         @pomodoros_bars ||=
           @parsed_files.map do |f|
-            "(#{f.date}) #{(1..f.pomodoros).map { '⚫' }.join}"
+            "(#{f.date}) #{(1..f.pomodoros).map { '⬛' }.join}"
           end
       end
 
@@ -105,14 +105,14 @@ module WorkMd
 
         @days_bars ||=
           @parsed_files.map do |f|
-            pom = (1..f.pomodoros).map { '⚫' }.join
-            mee = f.meetings.map { '🟪' }.join
-            int = f.interruptions.map { '🟨' }.join
-            dif = f.difficulties.map { '🟥' }.join
-            obs = f.observations.map { 'o' }.join
-            tas = f.tasks.map { '⬜' }.join
+            pom = (1..f.pomodoros).map { '⬛' }.join
+            mee = f.meetings.map { '📅' }.join
+            int = f.interruptions.map { '⚠️' }.join
+            dif = f.difficulties.map { '😓' }.join
+            obs = f.observations.map { '📝' }.join
+            tas = f.tasks.map { '✔️' }.join
 
-            "(#{f.date})\n\n#{pom}\n#{mee}\n#{int}\n#{dif}\n#{obs}\n#{tas}"
+            "(#{f.date}) #{pom}#{mee}#{int}#{dif}#{obs}#{tas}"
           end
       end
 

@@ -15,7 +15,8 @@ module WorkMd
           observations: 'Observações',
           pomodoros: 'Pomodoros / Ciclos',
           per_day: 'por dia',
-          days_bars: 'Gráficos'
+          total: 'total',
+          days_bars: 'Resumo'
         },
       'en' =>
         {
@@ -26,7 +27,8 @@ module WorkMd
           observations: 'Observations',
           pomodoros: 'Pomodoros / Cycles',
           per_day: 'per day',
-          days_bars: 'Gráficos'
+          total: 'all',
+          days_bars: 'Summary'
 
         },
       'es' =>
@@ -38,7 +40,8 @@ module WorkMd
           observations: 'Observaciones',
           pomodoros: 'Pomodoros / Ciclos',
           per_day: 'por día',
-          days_bars: 'Gráficos'
+          total: 'total',
+          days_bars: 'Abstracto'
         }
 
     }.freeze
