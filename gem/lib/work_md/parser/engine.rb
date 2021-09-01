@@ -89,7 +89,7 @@ module WorkMd
           @parsed_files.reduce(0) { |sum, f| sum + f.pomodoros || 0 }
       end
 
-      def pomodoros_bars(file = nil)
+      def pomodoros_bars(_file = nil)
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
         @pomodoros_bars ||=
@@ -98,6 +98,8 @@ module WorkMd
           end
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
       def days_bars
         raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
@@ -115,6 +117,8 @@ module WorkMd
             "(#{f.date}) #{pom}#{mee}#{int}#{dif}#{obs}#{tas}"
           end
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def freeze
         @frozen = true

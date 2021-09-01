@@ -28,5 +28,5 @@ rm -r vendor
 rm packaging/Gemfile.lock
 
 # package
-zip -9r work_md-0.3.3-win32-x86_64.zip work_md-0.3.3-win32-x86_64
-rm -rf work_md-0.3.3-win32-x86_64
+# zip -9r work_md-0.3.3-win32-x86_64.zip work_md-0.3.3-win32-x86_64
+# rm -rf work_md-0.3.3-win32-x86_64

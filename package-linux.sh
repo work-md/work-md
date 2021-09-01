@@ -28,5 +28,5 @@ rm -r vendor
 rm packaging/Gemfile.lock
 
 # package
-tar -czf work_md-0.3.3-linux-x86_64.tar.gz work_md-0.3.3-linux-x86_64
-rm -rf work_md-0.3.3-linux-x86_64
+# tar -czf work_md-0.3.3-linux-x86_64.tar.gz work_md-0.3.3-linux-x86_64
+# rm -rf work_md-0.3.3-linux-x86_64

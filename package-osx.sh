@@ -28,5 +28,5 @@ rm -r vendor
 rm packaging/Gemfile.lock
 
 # package
-tar -czf work_md-0.3.3-osx.tar.gz work_md-0.3.3-osx
-rm -rf work_md-0.3.3-osx
+# tar -czf work_md-0.3.3-osx.tar.gz work_md-0.3.3-osx
+# rm -rf work_md-0.3.3-osx
