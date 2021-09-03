@@ -5,4 +5,4 @@ set "BUNDLE_GEMFILE=%~dp0\vendor\Gemfile"
 set BUNDLE_IGNORE_CONFIG=
 
 :: Run the actual app using the bundled Ruby interpreter, with Bundler activated.
-@"%~dp0\lib\ruby\bin\ruby.bat" -rbundler/setup "%~dp0\gem/work_md.rb"
+@"%~dp0\ruby\bin\ruby.bat" -rbundler/setup "%~dp0\gem/work_md.rb"

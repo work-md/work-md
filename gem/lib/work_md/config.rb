@@ -29,7 +29,6 @@ module WorkMd
           per_day: 'per day',
           total: 'all',
           days_bars: 'Summary'
-
         },
       'es' =>
         {
@@ -43,7 +42,6 @@ module WorkMd
           total: 'total',
           days_bars: 'Abstracto'
         }
-
     }.freeze
 
     def self.title
