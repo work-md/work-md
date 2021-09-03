@@ -24,7 +24,9 @@ module WorkMd
           difficulties: 'Difficulties',
           observations: 'Observations',
           pomodoros: 'Pomodoros / Cycles',
-          per_day: 'per day'
+          per_day: 'per day',
+          total: 'all',
+          days_bars: 'Summary'
         },
       'es' =>
         {
@@ -36,7 +38,6 @@ module WorkMd
           pomodoros: 'Pomodoros / Ciclos',
           per_day: 'por día'
         }
-
     }.freeze
 
     def self.title

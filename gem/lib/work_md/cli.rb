@@ -10,7 +10,8 @@ module WorkMd
         'ty' => 'tyesterday',
         'y' => 'yesterday',
         'c' => 'config',
-        'p' => 'parse'
+        'p' => 'parse',
+        'a' => 'annotations'
       }.freeze
 
     def self.execute(argv)
