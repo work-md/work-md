@@ -50,6 +50,12 @@ Day 1 to 25 from month 2 and current year:
 
     $ work_md p -d=1..25 -m=2    
 
+### Add permanent annotations:
+
+Sometimes we need to keep permanent annotations (not only for a specific day), so we can:
+
+    $ work_md a
+
 ### Configure your preferences:
 
     $ work_md c
@@ -73,6 +79,8 @@ lang: pt # Your language ('pt', 'en' and 'es' available)
 `work_md ty`-> `work_md tyesterday`
 
 `work_md p`-> `work_md parse`
+
+`work_md a`-> `work_md annotations`
 
 `work_md c`-> `work_md config`
 
