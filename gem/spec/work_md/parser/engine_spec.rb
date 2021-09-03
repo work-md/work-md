@@ -17,6 +17,7 @@ RSpec.describe WorkMd::Parser::Engine do
         expect(parser.pomodoros_sum).to eq(0)
         expect(parser.average_pomodoros).to eq(0)
         expect(parser.pomodoros_bars).to eq([])
+        expect(parser.days_bars).to eq([])
       end
     end
 
@@ -60,7 +61,8 @@ RSpec.describe WorkMd::Parser::Engine do
         expect(parser.observations).to eq(["(00/00/0000) Some observation", "(00/00/0000) Some observation"])
         expect(parser.pomodoros_sum).to eq(13)
         expect(parser.average_pomodoros).to eq(6.5)
-        expect(parser.pomodoros_bars).to eq(["(00/00/0000) ◘◘◘", "(00/00/0000) ◘◘◘◘◘◘◘◘◘◘"])
+        expect(parser.pomodoros_bars).to eq(["(00/00/0000) ⬛⬛⬛", "(00/00/0000) ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛"])
+        expect(parser.days_bars).to eq(["(00/00/0000) ⬛⬛⬛📅📅⚠️😓📝✔️✔️", "(00/00/0000) ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛📅📅⚠️😓📝✔️✔️"])
       end
     end
   end
