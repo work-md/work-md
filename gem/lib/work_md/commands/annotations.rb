@@ -14,7 +14,7 @@ module WorkMd
             ::File.open("#{work_dir}/#{file_name}", 'w+') { |f| f.puts("# \n\n") }
           end
 
-          WorkMd::File.open_in_editor(file_names: [file_name])
+          WorkMd::File.open_in_editor([file_name])
         end
       end
     end

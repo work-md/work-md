@@ -25,7 +25,7 @@ module WorkMd
           end
 
           ::WorkMd::File.open_in_editor(
-            file_names: [file_name],
+            [file_name],
             dir: work_dir
           )
         end

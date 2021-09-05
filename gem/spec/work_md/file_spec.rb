@@ -13,6 +13,8 @@ RSpec.describe WorkMd::File do
 
     let(:expected_md_file) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m/%d')}.md" }
     let(:expected_md_file_dir) { "#{WorkMd::Config.work_dir}/#{some_date.strftime('%Y/%m')}" }
+    let(:expected_md_file_2) { "#{WorkMd::Config.work_dir}/something/#{some_date.strftime('%Y/%m/%d')}.md" }
+    let(:dir_2) { "#{WorkMd::Config.work_dir}/something" }
 
     it 'creates the md file in the work dir' do
       allow(::TTY::Editor).to(
@@ -37,6 +39,25 @@ RSpec.describe WorkMd::File do
       expect(file_content).to match(t[:difficulties])
       expect(file_content).to match(t[:observations])
       expect(file_content).to match(t[:pomodoros])
+    end
+
+    it 'creates the md file in any dir' do
+      allow(::TTY::Editor).to(
+        receive(:open)
+        .and_return(true)
+      )
+
+      described_class.open_or_create(some_date, dir: dir_2)
+
+      expect(
+        ::File
+        .exist?(expected_md_file_2)
+      ).to be_truthy
+
+      t = WorkMd::Config.translations
+      file_content = ::File.read(expected_md_file_2)
+
+      expect(file_content).to match(WorkMd::Config.title)
     end
 
     it 'dont creates the md file when already exists' do
@@ -77,7 +98,7 @@ RSpec.describe WorkMd::File do
             receive(:open)
             .with(file_name, file_name)
           )
-          described_class.open_in_editor(file_names: [file_name, file_name])
+          described_class.open_in_editor([file_name, file_name])
         end
       end
 

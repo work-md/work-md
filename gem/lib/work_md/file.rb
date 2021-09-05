@@ -2,13 +2,13 @@
 
 module WorkMd
   class File
-    def self.open_or_create(some_date)
-      open_in_editor(file_names: [create_if_not_exist(some_date)])
+    def self.open_or_create(some_date, dir: nil)
+      open_in_editor([create_if_not_exist(some_date, dir: dir)], dir: dir)
     end
 
-    def self.create_if_not_exist(some_date)
+    def self.create_if_not_exist(some_date, dir: nil)
       t = WorkMd::Config.translations
-      work_dir = WorkMd::Config.work_dir
+      work_dir = dir || WorkMd::Config.work_dir
 
       file_name = "#{some_date.strftime('%Y/%m/%d')}.md"
 
@@ -43,7 +43,7 @@ module WorkMd
       file_name
     end
 
-    def self.open_in_editor(file_names: [], dir: nil)
+    def self.open_in_editor(file_names = [], dir: nil)
       editor = WorkMd::Config.editor
       work_dir = dir || WorkMd::Config.work_dir
 

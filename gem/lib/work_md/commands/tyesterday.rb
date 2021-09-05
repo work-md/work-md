@@ -10,7 +10,7 @@ module WorkMd
               WorkMd::File.create_if_not_exist(date)
             end
 
-          WorkMd::File.open_in_editor(file_names: file_names)
+          WorkMd::File.open_in_editor(file_names)
         end
       end
     end
