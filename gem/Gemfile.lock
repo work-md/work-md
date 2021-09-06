@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    work_md (0.3.4)
+    work-md (0.3.4)
       tty-box (~> 0.7.0)
       tty-editor (~> 0.7.0)
 
@@ -43,8 +43,8 @@ GEM
       rubocop-ast (>= 0.6.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (1.4.1)
-      parser (>= 2.7.1.5)
+    rubocop-ast (1.4.2)
+      parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
     strings (0.2.1)
       strings-ansi (~> 0.2)
@@ -81,7 +81,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   rubocop (~> 0.80)
   rubocop-ast (~> 1.4.0)
-  work_md!
+  work-md!
 
 BUNDLED WITH
-   2.2.25
+   2.2.15

@@ -1,4 +1,4 @@
-![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo-resized.png)
+![Work::Md](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo-resized.png)
 
 ![](https://img.shields.io/gem/v/work_md?style=social)
 
@@ -100,4 +100,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the WorkMd project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/henriquefernandez/work_md/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Work::Md project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/henriquefernandez/work_md/blob/master/CODE_OF_CONDUCT.md).
+

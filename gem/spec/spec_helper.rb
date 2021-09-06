@@ -3,7 +3,7 @@
 require "./spec/helpers"
 require "byebug"
 require "fileutils"
-require "work_md"
+require "work/md"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -19,14 +19,14 @@ RSpec.configure do |config|
   config.include Helpers
 
   config.before(:each) do
-    allow(WorkMd::Config).to receive(:title).and_return('test title')
-    allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
+    allow(Work::Md::Config).to receive(:title).and_return('test title')
+    allow(Work::Md::Config).to receive(:work_dir).and_return(test_work_dir)
 
-    stub_const("::WorkMd::Config::DEFAULT_WORK_DIR", test_work_dir)
-    allow(WorkMd::Config).to receive(:work_dir).and_return(test_work_dir)
-    allow(WorkMd::Config).to receive(:editor).and_return(nil)
-    allow(WorkMd::Config).to(
-      receive(:translations).and_return(WorkMd::Config::TRANSLATIONS['en'])
+    stub_const("::Work::Md::Config::DEFAULT_WORK_DIR", test_work_dir)
+    allow(Work::Md::Config).to receive(:work_dir).and_return(test_work_dir)
+    allow(Work::Md::Config).to receive(:editor).and_return(nil)
+    allow(Work::Md::Config).to(
+      receive(:translations).and_return(Work::Md::Config::TRANSLATIONS['en'])
     )
   end
 end
