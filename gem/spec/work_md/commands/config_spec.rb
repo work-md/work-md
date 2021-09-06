@@ -59,7 +59,7 @@ RSpec.describe WorkMd::Commands::Config do
         expect(WorkMd::File).to(
           receive(:open_in_editor)
           .with(
-            file_names: [file_name],
+            [file_name],
             dir: ::WorkMd::Config::DEFAULT_WORK_DIR
           )
         )
