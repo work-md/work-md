@@ -6,6 +6,7 @@ RSpec.describe Work::Md::Commands::Parse do
   let(:today) { DateTime.now }
   let(:file_1_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}.md" }
   let(:file_2_path) { "#{test_work_dir}/#{today.strftime('%Y/%m/%d')}2.md" }
+  let(:parsed_file_path) { Work::Md::Config.work_dir + '/parsed.md' }
 
   before do
     ::FileUtils
@@ -43,11 +44,11 @@ RSpec.describe Work::Md::Commands::Parse do
 
       expect(
        ::File
-        .exist?(Work::Md::Commands::Parse::PARSED_FILE_PATH)
+        .exist?(parsed_file_path)
       ).to be_truthy
 
       t = Work::Md::Config.translations
-      file_content = ::File.read(Work::Md::Commands::Parse::PARSED_FILE_PATH)
+      file_content = ::File.read(parsed_file_path)
 
       expect(file_content).to match(t[:tasks])
       expect(file_content).to match(t[:meetings])
@@ -72,11 +73,11 @@ RSpec.describe Work::Md::Commands::Parse do
 
         expect(
           ::File
-          .exist?(Work::Md::Commands::Parse::PARSED_FILE_PATH)
+          .exist?(parsed_file_path)
         ).to be_truthy
 
         t = Work::Md::Config.translations
-        file_content = ::File.read(Work::Md::Commands::Parse::PARSED_FILE_PATH)
+        file_content = ::File.read(parsed_file_path)
 
         expect(file_content).to match(t[:tasks])
         expect(file_content).to match(t[:meetings])
@@ -95,7 +96,7 @@ RSpec.describe Work::Md::Commands::Parse do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
           receive(:open)
-          .with(Work::Md::Commands::Parse::PARSED_FILE_PATH)
+          .with(parsed_file_path)
           .and_return(true)
         )
 
@@ -108,7 +109,7 @@ RSpec.describe Work::Md::Commands::Parse do
         allow(Work::Md::Config).to(receive(:editor).and_return(editor))
         allow(::TTY::Editor).to(
           receive(:open)
-          .with(Work::Md::Commands::Parse::PARSED_FILE_PATH, command: editor)
+          .with(parsed_file_path, command: editor)
           .and_return(true)
         )
 
@@ -121,7 +122,7 @@ RSpec.describe Work::Md::Commands::Parse do
         expect(::TTY::Editor).to_not(
           receive(:open)
           .with(
-            Work::Md::Commands::Parse::PARSED_FILE_PATH
+            parsed_file_path
           )
         )
 

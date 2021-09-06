@@ -4,10 +4,9 @@ module Work
   module Md
     module Commands
       class Parse
-        PARSED_FILE_PATH = Work::Md::Config.work_dir + '/parsed.md'
-
         class << self
           def execute(argv = [])
+            parsed_file_path = Work::Md::Config.work_dir + '/parsed.md'
             args = Hash[argv.join(' ').scan(/-?([^=\s]+)(?:=(\S+))?/)]
             parser = Work::Md::Parser::Engine.new
             t = Work::Md::Config.translations
@@ -35,9 +34,9 @@ module Work
 
             parser.freeze
 
-            ::File.delete(PARSED_FILE_PATH) if ::File.exist? PARSED_FILE_PATH
+            ::File.delete(parsed_file_path) if ::File.exist? parsed_file_path
 
-            ::File.open(PARSED_FILE_PATH, 'w+') do |f|
+            ::File.open(parsed_file_path, 'w+') do |f|
               f.puts("# #{Work::Md::Config.title}\n\n")
               f.puts("### #{t[:tasks]} (#{parser.tasks.size}):\n\n")
               parser.tasks.each do |task|
@@ -87,9 +86,9 @@ module Work
             editor = Work::Md::Config.editor
 
             if editor.nil?
-              ::TTY::Editor.open(PARSED_FILE_PATH)
+              ::TTY::Editor.open(parsed_file_path)
             else
-              ::TTY::Editor.open(PARSED_FILE_PATH, command: editor)
+              ::TTY::Editor.open(parsed_file_path, command: editor)
             end
           rescue StandardError => e
             Work::Md::Cli.help(
