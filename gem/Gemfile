@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in work_md.gemspec
+# Specify your gem's dependencies in work-md.gemspec
 gemspec
 
 group :test, :development do

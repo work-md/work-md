@@ -1,68 +1,68 @@
-![WorkMd](https://raw.githubusercontent.com/henriquefernandez/work_md/master/logo-resized.png)
+![Work::Md](https://raw.githubusercontent.com/work-md/work-md/master/logo-resized.png)
 
-![](https://img.shields.io/gem/v/work_md?style=social)
+![](https://img.shields.io/gem/v/work-md?style=social)
 
 Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!
 
 ## Installation
 
-*Ruby (>= 2.3)* must be installed in your machine, then install `work_md` with:
+*Ruby (>= 2.3)* must be installed in your machine, then install `work-md` with:
 
-    $ gem install work_md
+    $ gem install work-md
 
 ## Usage
 
 ### Open or create a new work markdown file for today:
 
-    $ work_md t
+    $ work-md t
 
-By default, a work markdown file live in `[YOUR_HOME_DIRECTORY]/work_md/[YEAR]/[MONTH]/[DAY].md`
+By default, a work markdown file live in `[YOUR_HOME_DIRECTORY]/work-md/[YEAR]/[MONTH]/[DAY].md`
 
-If no default editor was set in your environment variables `work_md` will prompt you what editor you want to choose.
+If no default editor was set in your environment variables `work-md` will prompt you what editor you want to choose.
 
 You can also set the editor directly in the command call:
 
-    $ EDITOR=[YOUR_FAVORITE_EDITOR] work_md
+    $ EDITOR=[YOUR_FAVORITE_EDITOR] work-md
 
 ### Open or create a new work markdown file for yesterday:
 
-    $ work_md y
+    $ work-md y
 
 ### Open or create a new work markdown file for today and yesterday at same time:
 
-    $ work_md ty
+    $ work-md ty
 
 ### Parse your work markdown files:
 
 Day 1 from month 5 and year 2000:
 
-    $ work_md p -d=1 -m=5 -y=2000
+    $ work-md p -d=1 -m=5 -y=2000
 
 Day 1, 2 and 3 from the current month and year:
              
-    $ work_md p -d=1,2,3
+    $ work-md p -d=1,2,3
 
 Day 1 and 2 from month 4 and current year:
 
-    $ work_md p -d=1,2 -m=4    
+    $ work-md p -d=1,2 -m=4    
 
 Day 1 to 25 from month 2 and current year:
 
-    $ work_md p -d=1..25 -m=2    
+    $ work-md p -d=1..25 -m=2    
 
 ### Add permanent annotations:
 
 Sometimes we need to keep permanent annotations (not only for a specific day), so we can:
 
-    $ work_md a
+    $ work-md a
 
 ### Configure your preferences:
 
-    $ work_md c
+    $ work-md c
 
-This command creates a `config.yml` file in `[YOUR_HOME_DIRECTORY]/work_md` (or open, if the file already exists)
+This command creates a `config.yml` file in `[YOUR_HOME_DIRECTORY]/work-md` (or open, if the file already exists)
 
-We can configure `work_md` behaviour adding values in the created file, example:
+We can configure `work-md` behaviour adding values in the created file, example:
 
 ```yaml
 title: Your Name # Title your files
@@ -72,17 +72,17 @@ lang: pt # Your language ('pt', 'en' and 'es' available)
 
 ### Aliases:
 
-`work_md t`-> `work_md today`
+`work-md t`-> `work-md today`
 
-`work_md y`-> `work_md yesterday`
+`work-md y`-> `work-md yesterday`
 
-`work_md ty`-> `work_md tyesterday`
+`work-md ty`-> `work-md tyesterday`
 
-`work_md p`-> `work_md parse`
+`work-md p`-> `work-md parse`
 
-`work_md a`-> `work_md annotations`
+`work-md a`-> `work-md annotations`
 
-`work_md c`-> `work_md config`
+`work-md c`-> `work-md config`
 
 ## Development
 
@@ -92,7 +92,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/henriquefernandez/work_md. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/henriquefernandez/work_md/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/work-md/work-md. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/work-md/work-md/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -100,4 +100,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the WorkMd project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/henriquefernandez/work_md/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Work::Md project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/work-md/work-md/blob/master/CODE_OF_CONDUCT.md).
+

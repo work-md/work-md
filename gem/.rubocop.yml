@@ -1,11 +1,11 @@
 AllCops:
   Exclude:
     - 'spec/**/*'
-    - 'lib/work_md/commands/**/*'
-    - 'work_md.gemspec'
+    - 'lib/work/md/commands/**/*'
+    - 'work-md.gemspec'
 
 Layout/LineLength:
-  Max: 80
+  Max: 90
 
 Style/Documentation:
   Enabled: false
