@@ -16,7 +16,7 @@ require 'fileutils'
 require 'tty-box'
 require 'tty-editor'
 
-# in the ruby gems standards work-md == Work::Md
+# work-md == Work::Md (rubygems standards)
 module Work
   module Md
   end
