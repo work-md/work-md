@@ -83,13 +83,7 @@ module Work
               f.puts("\n\n")
             end
 
-            editor = Work::Md::Config.editor
-
-            if editor.nil?
-              ::TTY::Editor.open(parsed_file_path)
-            else
-              ::TTY::Editor.open(parsed_file_path, command: editor)
-            end
+            Work::Md::File.open_in_editor([parsed_file_path])
           rescue StandardError => e
             Work::Md::Cli.help(
               ::TTY::Box.frame(
