@@ -3,6 +3,7 @@
 require_relative 'md/version'
 require_relative 'md/config'
 require_relative 'md/file'
+require_relative 'md/date_file'
 require_relative 'md/commands/today'
 require_relative 'md/commands/config'
 require_relative 'md/commands/yesterday'

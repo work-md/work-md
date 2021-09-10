@@ -52,44 +52,41 @@ module Work
               parser.interruptions.each do |interruption|
                 f.puts("- #{interruption}\n")
               end
+              f.puts("\n") if parser.interruptions.size > 0
               f.puts("---\n\n")
               f.puts("### #{t[:difficulties]} (#{parser.difficulties.size}):\n\n")
               parser.difficulties.each do |difficulty|
                 f.puts("- #{difficulty}\n")
               end
+              f.puts("\n") if parser.difficulties.size > 0
               f.puts("---\n\n")
               f.puts("### #{t[:observations]} (#{parser.observations.size}):\n\n")
               parser.observations.each do |observation|
                 f.puts("- #{observation}\n")
               end
+              f.puts("\n") if parser.observations.size > 0
               f.puts("---\n\n")
               f.puts("### #{t[:pomodoros]} (#{parser.average_pomodoros} #{t[:per_day]}):\n\n")
               f.puts("**#{t[:total]}: #{parser.pomodoros_sum}**")
-              f.puts("\n\n")
+              f.puts("\n")
               parser.pomodoros_bars.each do |pomodoro_bar|
                 f.puts(pomodoro_bar)
-                f.puts("\n\n")
+                f.puts("\n")
               end
               f.puts("---\n\n")
               f.puts("### #{t[:days_bars]}:\n\n")
               f.puts("**#{t[:pomodoros]}: ⬛ | #{t[:meetings]}: 📅 | #{t[:interruptions]}: ⚠️ | #{t[:difficulties]}: 😓 | #{t[:observations]}: 📝 | #{t[:tasks]}: ✔️**")
 
-              f.puts("\n\n")
+              f.puts("\n")
               parser.days_bars.each do |day_bar|
                 f.puts(day_bar)
-                f.puts("\n\n")
+                f.puts("\n")
               end
 
               f.puts("\n\n")
             end
 
-            editor = Work::Md::Config.editor
-
-            if editor.nil?
-              ::TTY::Editor.open(parsed_file_path)
-            else
-              ::TTY::Editor.open(parsed_file_path, command: editor)
-            end
+            Work::Md::File.open_in_editor([parsed_file_path])
           rescue StandardError => e
             Work::Md::Cli.help(
               ::TTY::Box.frame(

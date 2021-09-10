@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 module Work
   module Md
     module Parser
@@ -144,53 +146,65 @@ module Work
             parsed_file.date =
               content.split(' - ')[0].gsub('# ', '').gsub("\n\n", '')
           elsif content.start_with?(@t[:tasks])
-            parsed_file.tasks = parse_check_list(content)
+            parsed_file.tasks = parse_check_list(content, start_with: @t[:tasks])
           elsif content.start_with?(@t[:meetings])
-            parsed_file.meetings = parse_check_list(content)
+            parsed_file.meetings = parse_check_list(content, start_with: @t[:meetings])
           elsif content.start_with?(@t[:interruptions])
             parsed_file.interruptions =
-              parse_list(content).map do |interruption|
+              parse_list(content, start_with: @t[:interruptions]).map do |interruption|
                 "(#{parsed_file.date}) #{interruption}"
               end
           elsif content.start_with?(@t[:difficulties])
-            parsed_file.difficulties = parse_list(content).map do |difficulty|
-              "(#{parsed_file.date}) #{difficulty}"
-            end
+            parsed_file.difficulties =
+              parse_list(
+                content, start_with: @t[:difficulties]
+              ).map do |difficulty|
+                "(#{parsed_file.date}) #{difficulty}"
+              end
           elsif content.start_with?(@t[:observations])
-            parsed_file.observations = parse_list(content).map do |observations|
-              "(#{parsed_file.date}) #{observations}"
-            end
+            parsed_file.observations =
+              parse_list(
+                content, start_with: @t[:observations]
+              ).map do |observations|
+                "(#{parsed_file.date}) #{observations}"
+              end
           elsif content.start_with?(@t[:pomodoros])
-            parsed_file.pomodoros = parse_pomodoro(content)
+            parsed_file.pomodoros =
+              parse_pomodoro(content, start_with: @t[:pomodoros])
           end
         end
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity
 
-        def parse_check_list(content)
-          clear_list(basic_parse(content).split('- ['))
+        def parse_check_list(content, start_with: nil)
+          clear_list(basic_parse(content, start_with: start_with).split('- ['))
         end
 
-        def parse_list(content)
-          clear_list(basic_parse(content).split('- '))
+        def parse_list(content, start_with: nil)
+          clear_list(basic_parse(content, start_with: start_with).split('- '))
         end
 
-        def parse_pomodoro(content)
-          basic_parse(content).scan(/\d+/).first.to_i
+        def parse_pomodoro(content, start_with: nil)
+          basic_parse(content, start_with: start_with).scan(/\d+/).first.to_i
         end
 
-        def basic_parse(content)
+        def basic_parse(content, start_with: nil)
+          return content.split("#{start_with}:\n")[1] unless start_with.nil?
+
           content.split(":\n\n")[1]
         end
 
+        # rubocop:disable Metrics/CyclomaticComplexity
         def clear_list(list)
           return list unless list.is_a?(Array)
 
           list
             .map { |s| s.gsub('---', '') unless s.nil? }
-            .select { |s| (s != '') && (s != "\n\n") }
+            .select { |s| (s != "\n\n") && (s != "\n\n\n") }
             .map(&:strip)
+            .reject { |s| (s == '') }
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
       end
       # rubocop:enable Metrics/ClassLength
     end
