@@ -6,7 +6,7 @@ module Work
       class Yesterday
         class << self
           def execute(_argv = [])
-            Work::Md::File.open_or_create(Date.today.prev_day)
+            Work::Md::DateFile.open_or_create(Date.today.prev_day)
           end
         end
       end

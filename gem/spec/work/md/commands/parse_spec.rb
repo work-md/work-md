@@ -139,7 +139,7 @@ RSpec.describe Work::Md::Commands::Parse do
         allow(Work::Md::Config).to(receive(:editor).and_return(editor))
         allow(::TTY::Editor).to(
           receive(:open)
-          .with(parsed_file_path, command: editor)
+          .with(parsed_file_path)
           .and_return(true)
         )
 
