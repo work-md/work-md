@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 module Work
   module Md
     module Commands
@@ -7,29 +9,37 @@ module Work
         class << self
           def execute(argv = [])
             parsed_file_path = Work::Md::Config.work_dir + '/parsed.md'
-            args = Hash[argv.join(' ').scan(/-?([^=\s]+)(?:=(\S+))?/)]
-            parser = Work::Md::Parser::Engine.new
             t = Work::Md::Config.translations
 
-            year = args['y'] || Time.new.year
-            month = args['m'] || Time.new.month
+            parser = Work::Md::Parser::Engine.new
+            args_hash_to_parser = -> (args, received_parser) {
+              year = args['y'] || Time.new.year
+              month = args['m'] || Time.new.month
 
-            month = "0#{month.to_i}" if month.to_i < 10
+              month = "0#{month.to_i}" if month.to_i < 10
 
-            add_file_to_parser = lambda do |day|
-              day = "0#{day.to_i}" if day.to_i < 10
+              add_file_to_parser = lambda do |day|
+                day = "0#{day.to_i}" if day.to_i < 10
 
-              file_name = Work::Md::Config.work_dir + "/#{year}/#{month}/#{day}.md"
+                file_name = Work::Md::Config.work_dir + "/#{year}/#{month}/#{day}.md"
 
-              parser.add_file(file_name)
-            end
+                received_parser.add_file(file_name)
+              end
 
-            if args['d'].include?('..')
-              range = args['d'].split('..')
+              if args['d'].include?('..')
+                range = args['d'].split('..')
 
-              (range[0].to_i..range[1].to_i).each { |day| add_file_to_parser.call(day) }
-            else
-              args['d'].split(',').each { |day| add_file_to_parser.call(day) }
+                (range[0].to_i..range[1].to_i).each { |day| add_file_to_parser.call(day) }
+              else
+                args['d'].split(',').each { |day| add_file_to_parser.call(day) }
+              end
+
+              received_parser
+            }
+
+            argv.join('#').split('#and#').map { |v| v.split("#") }.each do |args|
+              args_hash = Hash[args.join(' ').scan(/-?([^=\s]+)(?:=(\S+))?/)]
+              args_hash_to_parser.(args_hash, parser)
             end
 
             parser.freeze
