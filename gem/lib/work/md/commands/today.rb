@@ -6,7 +6,7 @@ module Work
       class Today
         class << self
           def execute(_argv = [])
-            Work::Md::File.open_or_create(DateTime.now)
+            Work::Md::DateFile.open_or_create(DateTime.now)
           end
         end
       end

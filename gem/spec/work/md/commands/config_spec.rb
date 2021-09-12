@@ -13,7 +13,7 @@ RSpec.describe Work::Md::Commands::Config do
     let(:expected_config_file) { "#{expected_config_file_dir}/#{file_name}" }
 
     it 'creates and open the config file in the default work dir' do
-      allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
+      allow(Work::Md::DateFile).to(receive(:open_in_editor).and_return(true))
       expect(Work::Md::File).to(receive(:open_in_editor))
 
       described_class.execute([])
