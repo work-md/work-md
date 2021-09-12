@@ -50,6 +50,10 @@ Day 1 to 25 from month 2 and current year:
 
     $ work-md p -d=1..25 -m=2    
 
+Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
+
+    $ work-md p -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
+
 ### Add permanent annotations:
 
 Sometimes we need to keep permanent annotations (not only for a specific day), so we can:

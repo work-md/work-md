@@ -92,6 +92,36 @@ RSpec.describe Work::Md::Commands::Parse do
       end
     end
 
+    context 'composing arguments' do
+      it 'creates the parsed.md file in the work dir' do
+        allow(::TTY::Editor).to(
+          receive(:open)
+          .and_return(true)
+        )
+
+        described_class.execute(["-d=#{today.strftime('%d')}", 'and', "-d=#{today.strftime('%d')}"])
+
+        expect(
+          ::File
+          .exist?(parsed_file_path)
+        ).to be_truthy
+
+        t = Work::Md::Config.translations
+        file_content = ::File.read(parsed_file_path)
+
+        expect(file_content).to match(t[:tasks])
+        expect(file_content).to match(t[:meetings])
+        expect(file_content).to match(t[:interruptions])
+        expect(file_content).to match(t[:difficulties])
+        expect(file_content).to match(t[:observations])
+        expect(file_content).to match(t[:pomodoros])
+        expect(file_content).to match(t[:days_bars])
+        expect(file_content).to match(t[:total])
+        expect(file_content).to match(/\b4\b/)
+        expect(file_content).to match(/\b2\b/)
+      end
+    end
+
     context 'opening the md file in the work dir' do
       it 'when editor not set' do
         allow(::TTY::Editor).to(
