@@ -9,4 +9,4 @@ export BUNDLE_GEMFILE="$SELFDIR/vendor/Gemfile"
 unset BUNDLE_IGNORE_CONFIG
 
 # Run the actual app using the bundled Ruby interpreter.
-exec "$SELFDIR/ruby/bin/ruby" -r bundler/setup "$SELFDIR/gem/work-md.rb" "$@"
+exec "$SELFDIR/ruby/bin/ruby" -r bundler/setup "$SELFDIR/gem/bin/work-md.rb" "$@"

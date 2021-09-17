@@ -1,5 +1,5 @@
 1. manually populate packaging/Gemfile
-2. manually add:
+2. manually add this in vendor/Gemfile.lock:
 
 BUNDLED WITH
    1.17.3
