@@ -12,6 +12,18 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
     $ gem install work-md
 
+### From binaries
+
+#### Linux users
+
+    $ curl -L -o work-md-0.3.10.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-linux-x86_64.tar.gz | 
+    $ tar -xzf work-md-0.3.10.tar.gz
+
+#### OSx users
+
+    $ curl -L -o work-md-0.3.10.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-osx-x86_64.tar.gz | 
+    $ tar -xzf work-md-0.3.10.tar.gz
+
 ## Usage
 
 ### Open or create a new work markdown file for today:

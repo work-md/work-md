@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 module Work
   module Md
     module Cli
@@ -12,7 +14,8 @@ module Work
           'y' => 'yesterday',
           'c' => 'config',
           'p' => 'parse',
-          'a' => 'annotations'
+          'a' => 'annotations',
+          'l' => 'last'
         }.freeze
 
       def self.execute(argv)
@@ -52,6 +55,7 @@ module Work
           '- work-md tyesterday',
           '- work-md parse',
           '- work-md annotations',
+          '- work-md last',
           '- work-md config',
           '',
           'more information in github.com/work-md',
