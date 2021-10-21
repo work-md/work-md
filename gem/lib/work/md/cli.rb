@@ -12,7 +12,9 @@ module Work
           'y' => 'yesterday',
           'c' => 'config',
           'p' => 'parse',
-          'a' => 'annotations'
+          'a' => 'annotations',
+          'l' => 'last',
+          'tl' => 'tlast'
         }.freeze
 
       def self.execute(argv)
@@ -27,7 +29,7 @@ module Work
         Object
           .const_get("Work::Md::Commands::#{command}")
           .send(:execute, argv)
-      rescue NameError
+      rescue NameError => e
         puts help(
           ::TTY::Box.frame(
             "Command '#{first_argv_argument}' not found!",
@@ -50,6 +52,8 @@ module Work
           '- work-md today',
           '- work-md yesterday',
           '- work-md tyesterday',
+          '- work-md last',
+          '- work-md tlast',
           '- work-md parse',
           '- work-md annotations',
           '- work-md config',
