@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
-
 module Work
   module Md
     module Cli
@@ -15,7 +13,8 @@ module Work
           'c' => 'config',
           'p' => 'parse',
           'a' => 'annotations',
-          'l' => 'last'
+          'l' => 'last',
+          'tl' => 'tlast'
         }.freeze
 
       def self.execute(argv)
@@ -30,7 +29,7 @@ module Work
         Object
           .const_get("Work::Md::Commands::#{command}")
           .send(:execute, argv)
-      rescue NameError
+      rescue NameError => e
         puts help(
           ::TTY::Box.frame(
             "Command '#{first_argv_argument}' not found!",
@@ -53,9 +52,10 @@ module Work
           '- work-md today',
           '- work-md yesterday',
           '- work-md tyesterday',
+          '- work-md last',
+          '- work-md tlast',
           '- work-md parse',
           '- work-md annotations',
-          '- work-md last',
           '- work-md config',
           '',
           'more information in github.com/work-md',

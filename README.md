@@ -12,18 +12,6 @@ Track your work activities, write annotations, recap what you did for a week, mo
 
     $ gem install work-md
 
-### From binaries
-
-#### Linux users
-
-    $ curl -L -o work-md-0.3.10.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-linux-x86_64.tar.gz | 
-    $ tar -xzf work-md-0.3.10.tar.gz
-
-#### OSx users
-
-    $ curl -L -o work-md-0.3.10.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-osx-x86_64.tar.gz | 
-    $ tar -xzf work-md-0.3.10.tar.gz
-
 ## Usage
 
 ### Open or create a new work markdown file for today:
@@ -46,6 +34,14 @@ You can also set the editor directly in the command call:
 
     $ work-md ty
 
+### Open the last file created:
+
+    $ work-md l
+
+### Open or create a new work markdown file for today and open the last file created:
+
+    $ work-md tl
+
 ### Parse your work markdown files:
 
 Day 1 from month 5 and year 2000:
@@ -67,6 +63,8 @@ Day 1 to 25 from month 2 and current year:
 Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 
     $ work-md p -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
+
+The `-d` argument is required.
 
 ### Add permanent annotations:
 
@@ -95,6 +93,10 @@ lang: pt # Your language ('pt', 'en' and 'es' available)
 `work-md y`-> `work-md yesterday`
 
 `work-md ty`-> `work-md tyesterday`
+
+`work-md l`-> `work-md last`
+
+`work-md tl`-> `work-md tlast`
 
 `work-md p`-> `work-md parse`
 

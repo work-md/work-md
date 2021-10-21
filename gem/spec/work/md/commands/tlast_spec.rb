@@ -2,8 +2,8 @@
 
 require 'fileutils'
 
-RSpec.describe Work::Md::Commands::Tyesterday do
-  let(:today) { DateTime.now }
+RSpec.describe Work::Md::Commands::Tlast do
+  let(:today) { DateTime.parse "20210729" }
   let(:yesterday) { Date.today.prev_day }
 
   before do
@@ -12,18 +12,14 @@ RSpec.describe Work::Md::Commands::Tyesterday do
   end
 
   context 'executing' do
-    it 'opens or create today and yesterday files' do
-      allow(Work::Md::DateFile).to(receive(:create_if_not_exist).and_return(true))
-      allow(Work::Md::DateFile).to(receive(:create_if_not_exist).and_return(true))
-      allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
+    it 'opens or create today file and open last file' do
+      allow(Work::Md::DateFile).to(receive(:create_if_not_exist).and_return("today_file_name"))
       allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
 
       expect(Work::Md::DateFile)
         .to(receive(:create_if_not_exist).with(today))
-      expect(Work::Md::DateFile)
-        .to(receive(:create_if_not_exist).with(yesterday))
       expect(Work::Md::File)
-        .to(receive(:open_in_editor))
+        .to(receive(:open_in_editor).with(["today_file_name", "2021/07/23.md"]))
 
       described_class.execute([])
     end

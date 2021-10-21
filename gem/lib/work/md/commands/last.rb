@@ -8,9 +8,9 @@ module Work
           def execute(_argv = [])
             found_file = false
             current_day = Date.today.prev_day
+            work_dir = Work::Md::Config.work_dir
 
-            (1..60).each do
-              work_dir = Work::Md::Config.work_dir
+            (1..90).each do
 
               file_name = "#{current_day.strftime('%Y/%m/%d')}.md"
 
@@ -26,7 +26,7 @@ module Work
             unless found_file
               Work::Md::Cli.help(
                 ::TTY::Box.frame(
-                  "message: No file found in last 60 days",
+                  "message: No file found in last 90 days",
                   **Work::Md::Cli.error_frame_style
                 )
               )
