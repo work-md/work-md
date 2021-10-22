@@ -10,7 +10,7 @@ module Work
             work_dir = Work::Md::Config.work_dir
             last_file_name = nil
 
-            (1..90).each do
+            (1..160).each do
               last_file_name = "#{last_date.strftime('%Y/%m/%d')}.md"
               break if ::File.exist?("#{work_dir}/#{last_file_name}")
 

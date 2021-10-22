@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    work-md (0.3.9)
+    work-md (0.4.0)
       tty-box (~> 0.7.0)
       tty-editor (~> 0.7.0)
 
@@ -84,4 +84,4 @@ DEPENDENCIES
   work-md!
 
 BUNDLED WITH
-   2.2.15
+   2.2.22
