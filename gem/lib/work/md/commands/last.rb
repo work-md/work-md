@@ -10,8 +10,7 @@ module Work
             current_day = Date.today.prev_day
             work_dir = Work::Md::Config.work_dir
 
-            (1..90).each do
-
+            (1..160).each do
               file_name = "#{current_day.strftime('%Y/%m/%d')}.md"
 
               if ::File.exist?("#{work_dir}/#{file_name}")
@@ -26,7 +25,7 @@ module Work
             unless found_file
               Work::Md::Cli.help(
                 ::TTY::Box.frame(
-                  "message: No file found in last 90 days",
+                  "message: No file found in last 5 months",
                   **Work::Md::Cli.error_frame_style
                 )
               )
