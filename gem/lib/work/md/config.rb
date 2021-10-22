@@ -54,7 +54,12 @@ module Work
       end
 
       def self.work_dir
-        ENV['WORK_MD_DIR'] || DEFAULT_WORK_DIR
+        dir =
+          ENV['WORK_MD_DIR'] || DEFAULT_WORK_DIR
+
+        return "#{dir}/#{ENV['WORK_MD_TAG']}" if ENV['WORK_MD_TAG']
+
+        dir
       end
 
       def self.translations
