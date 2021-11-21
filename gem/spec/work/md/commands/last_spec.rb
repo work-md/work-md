@@ -33,7 +33,7 @@ RSpec.describe Work::Md::Commands::Last do
       expect(File.read(expected_md_file)).to eq("test\n")
     end
 
-    it 'show message when no file is found in last 90 days' do
+    it 'show message when no file is found in last 5 months' do
       allow(::TTY::Editor).to(
         receive(:open)
         .and_return(true)
@@ -45,7 +45,7 @@ RSpec.describe Work::Md::Commands::Last do
       ).to be_falsey
 
       expect { described_class.execute([]) }
-        .to output(/No file found in last 90 days/).to_stdout
+        .to output(/No file found in last 5 months/).to_stdout
     end
 
     context 'opening the md file in the work dir' do
