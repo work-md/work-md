@@ -64,7 +64,11 @@ Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 
     $ work-md p -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
 
-The `-d` argument is required.
+Last 15 days:
+
+    $ work-md pl 15
+
+The `-d` argument is required, except when we are using the `pl` command:
 
 ### Add permanent annotations:
 
@@ -99,6 +103,8 @@ lang: pt # Your language ('pt', 'en' and 'es' available)
 `work-md tl`-> `work-md tlast`
 
 `work-md p`-> `work-md parse`
+
+`work-md plast`-> `work-md plast`
 
 `work-md a`-> `work-md annotations`
 

@@ -12,6 +12,7 @@ module Work
           'y' => 'yesterday',
           'c' => 'config',
           'p' => 'parse',
+          'pl' => 'plast',
           'a' => 'annotations',
           'l' => 'last',
           'tl' => 'tlast'
