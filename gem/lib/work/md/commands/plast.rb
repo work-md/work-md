@@ -23,6 +23,17 @@ module Work
             end
 
             Work::Md::File.create_and_open_parsed(parser)
+          rescue StandardError
+            Work::Md::Cli.help(
+              ::TTY::Box.frame(
+                "message: Some of verified markdown files may be with an incorrect format",
+                '',
+                'Usage example:',
+                '',
+                'work-md pl 7       # parse the last 7 days',
+                **Work::Md::Cli.error_frame_style
+              )
+            )
           end
         end
       end

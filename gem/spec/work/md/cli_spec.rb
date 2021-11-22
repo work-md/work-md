@@ -22,6 +22,19 @@ RSpec.describe Work::Md::Cli do
         Work::Md::Cli.execute(argv)
       end
     end
+
+    context "when tag given" do
+      it "put the tag in env and exclude it from argv" do
+        argv = %w[today opt -tag=123]
+
+        expect(Work::Md::Commands::Today)
+          .to receive(:execute).with(%w[opt])
+
+        Work::Md::Cli.execute(argv)
+
+        expect(ENV['WORK_MD_TAG']).to eq("123")
+      end
+    end
   end
 
   describe "using help" do
