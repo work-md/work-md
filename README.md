@@ -90,6 +90,16 @@ editor: gedit # Your default editor
 lang: pt # Your language ('pt', 'en' and 'es' available)
 ```
 
+### Tags and multiples projects:
+
+We can use the `-tag` argument in any `work-md` command, ex:
+
+    $ work-md t -tag=other_project
+
+It will scope the command to the `other_project` tag, behind the scenes a tag is only a subdirectory in the root `work-md` directory. We can also set the tag with an environment variable named `WORK_MD_TAG`, ex:
+
+    $ WORK_MD_TAG=other_project work-md t
+
 ### Aliases:
 
 `work-md t`-> `work-md today`
