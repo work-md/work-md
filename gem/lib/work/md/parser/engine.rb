@@ -28,7 +28,7 @@ module Work
           raise IS_FROZEN_ERROR_MESSAGE if @frozen
 
           begin
-            file_content = ::File.read(file)
+            file_content = ::File.read(file).squeeze(' ').strip
           rescue Errno::ENOENT
             return
           end
@@ -187,7 +187,12 @@ module Work
         end
 
         def basic_parse(content, start_with: nil)
-          return content.split("#{start_with}:\n")[1] unless start_with.nil?
+          unless start_with.nil?
+            return content
+                   .split("#{start_with}:")[1]
+                   .squeeze(' ')
+                   .sub("\n\n", "\n")
+          end
 
           content.split(":\n\n")[1]
         end
