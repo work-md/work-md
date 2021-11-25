@@ -23,7 +23,15 @@ RSpec.describe Work::Md::Commands::Plast do
       expect(double_parser).to receive(:add_file).exactly(2).times
       expect(Work::Md::File).to(receive(:create_and_open_parsed).with(double_parser))
 
-      described_class.execute([2])
+      described_class.execute(["2"])
+    end
+
+    it 'it show message if not numeric argument is given' do
+      expect(::TTY::Editor).to_not(
+        receive(:open)
+      )
+      expect { described_class.execute(["-d bla"]) }
+        .to output(/you give: ["-d bla"]/).to_stdout
     end
   end
 end
