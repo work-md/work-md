@@ -72,9 +72,9 @@ module Work
           end
 
           f.puts("\n\n")
-
-          Work::Md::File.open_in_editor([parsed_file_path])
         end
+
+        Work::Md::File.open_in_editor([parsed_file_path])
       end
     end
   end
