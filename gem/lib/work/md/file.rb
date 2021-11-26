@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 module Work
   module Md
     class File
@@ -72,9 +74,9 @@ module Work
           end
 
           f.puts("\n\n")
-
-          Work::Md::File.open_in_editor([parsed_file_path])
         end
+
+        Work::Md::File.open_in_editor([parsed_file_path])
       end
     end
   end

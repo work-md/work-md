@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'date'
+
 module Work
   module Md
     module Parser
+      class Error < StandardError; end
+
       # rubocop:disable Metrics/ClassLength
       class Engine
         IS_FROZEN_ERROR_MESSAGE = 'Work::Md::Parser::Engine is frozen'
@@ -108,12 +112,12 @@ module Work
 
           @days_bars ||=
             @parsed_files.map do |f|
-              pom = (1..f.pomodoros).map { '⬛' }.join
-              mee = f.meetings.map { '📅' }.join
-              int = f.interruptions.map { '⚠️' }.join
-              dif = f.difficulties.map { '😓' }.join
-              obs = f.observations.map { '📝' }.join
-              tas = f.tasks.map { '✔️' }.join
+              pom = (1..f.pomodoros).map { '⬛' }.join if f.pomodoros
+              mee = f.meetings.map { '📅' }.join if f.meetings
+              int = f.interruptions.map { '⚠️' }.join if f.interruptions
+              dif = f.difficulties.map { '😓' }.join if f.difficulties
+              obs = f.observations.map { '📝' }.join if f.observations
+              tas = f.tasks.map { '✔️' }.join if f.tasks
 
               "(#{f.date}) #{pom}#{mee}#{int}#{dif}#{obs}#{tas}"
             end
@@ -170,6 +174,19 @@ module Work
             parsed_file.pomodoros =
               parse_pomodoro(content, start_with: @t[:pomodoros])
           end
+        rescue StandardError
+          # TODO: Write tests for this scenario
+          file_name = Date.strptime(parsed_file.date, '%d/%m/%Y').strftime('%Y/%m/%d.md')
+          message = ::TTY::Box.frame(
+            "message: Cannot parse file '#{file_name}' maybe it's in an incorrect format.",
+            '',
+            'Usage example:',
+            '',
+            'work-md pl 7       # parse the last 7 days',
+            **Work::Md::Cli.error_frame_style
+          )
+
+          raise Error, message
         end
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity

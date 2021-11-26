@@ -42,7 +42,9 @@ module Work
             end
 
             Work::Md::File.create_and_open_parsed(parser)
-          rescue StandardError
+          rescue Work::Md::Parser::Error => e
+            Work::Md::Cli.help(e.message)
+          rescue StandardError => e
             Work::Md::Cli.help(
               ::TTY::Box.frame(
                 "message: Some of verified markdown files may be with an incorrect format",

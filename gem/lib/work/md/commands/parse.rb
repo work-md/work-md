@@ -37,6 +37,8 @@ module Work
             end
 
             Work::Md::File.create_and_open_parsed(parser)
+          rescue Work::Md::Parser::Error => e
+            Work::Md::Cli.help(e.message)
           rescue StandardError
             Work::Md::Cli.help(
               ::TTY::Box.frame(
