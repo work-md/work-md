@@ -114,7 +114,7 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 
 `work-md p`-> `work-md parse`
 
-`work-md plast`-> `work-md plast`
+`work-md pl`-> `work-md plast`
 
 `work-md a`-> `work-md annotations`
 
