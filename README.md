@@ -34,7 +34,7 @@ You can also set the editor directly in the command call:
 
     $ work-md ty
 
-### Open specific date file(s):
+### Open specific date work markdown file(s):
 
 Day 1 from month 5 and year 2000:
 
@@ -60,15 +60,15 @@ The `-d` argument is required in all cases.
 
 ### Open the last file created:
 
-$ work-md l
+    $ work-md l
 
 And the last 'n' files created:
 
-$ work-md l 7
+    $ work-md l 7
 
 ### Open or create a new work markdown file for today and open the last file created:
 
-$ work-md tl
+    $ work-md tl
 
 ### Parse your work markdown files:
 
@@ -97,6 +97,8 @@ Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 The `-d` argument is required in all cases.
 
 ### Parse the last 'n' work markdown files:
+
+Last 15 days:
 
     $ work-md pl 15
 
