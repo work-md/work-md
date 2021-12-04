@@ -34,15 +34,45 @@ You can also set the editor directly in the command call:
 
     $ work-md ty
 
+### Open specific date file(s):
+
+Day 1 from month 5 and year 2000:
+
+    $ work-md o -d=1 -m=5 -y=2000
+
+Day 1, 2 and 3 from the current month and year:
+
+    $ work-md o -d=1,2,3
+
+Day 1 and 2 from month 4 and current year:
+
+    $ work-md o -d=1,2 -m=4    
+
+Day 1 to 25 from month 2 and current year:
+
+    $ work-md o -d=1..25 -m=2    
+
+Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
+
+    $ work-md o -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
+
+The `-d` argument is required in all cases.
+
 ### Open the last file created:
 
-    $ work-md l
+$ work-md l
+
+And the last 'n' files created:
+
+$ work-md l 7
 
 ### Open or create a new work markdown file for today and open the last file created:
 
-    $ work-md tl
+$ work-md tl
 
 ### Parse your work markdown files:
+
+The parse command receive the same query arguments that `open` command receives, but instead of open it parse all the files matching the query, ex:
 
 Day 1 from month 5 and year 2000:
 
@@ -64,35 +94,11 @@ Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 
     $ work-md p -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
 
-Last 15 days:
+The `-d` argument is required in all cases.
+
+### Parse the last 'n' work markdown files:
 
     $ work-md pl 15
-
-The `-d` argument is required, except when we are using the `pl` command:
-
-### Open specific date file(s):
-
-The open command receive the same query arguments that `parse` command receives, but instead of parse it open all the files matching the query, ex:
-
-Day 1 from month 5 and year 2000:
-
-    $ work-md o -d=1 -m=5 -y=2000
-
-Day 1, 2 and 3 from the current month and year:
-
-    $ work-md o -d=1,2,3
-
-Day 1 and 2 from month 4 and current year:
-
-    $ work-md o -d=1,2 -m=4    
-
-Day 1 to 25 from month 2 and current year:
-
-    $ work-md o -d=1..25 -m=2    
-
-Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
-
-    $ work-md o -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
 
 ### Add permanent annotations:
 

@@ -14,6 +14,25 @@ RSpec.describe Work::Md::Commands::Last do
     let(:expected_md_file) { "#{Work::Md::Config.work_dir}/#{last.strftime('%Y/%m/%d')}.md" }
     let(:expected_md_file_dir) { "#{Work::Md::Config.work_dir}/#{last.strftime('%Y/%m')}" }
 
+    it 'open the last md file with number argument when already exists' do
+      allow(::TTY::Editor).to(
+        receive(:open)
+        .and_return(true)
+      )
+
+      ::FileUtils.mkdir_p(expected_md_file_dir)
+      ::File.open(expected_md_file, 'w+') { |f| f.puts("test") }
+
+      described_class.execute(['1'])
+
+      expect(
+        ::File
+        .exist?(expected_md_file)
+      ).to be_truthy
+
+      expect(File.read(expected_md_file)).to eq("test\n")
+    end
+
     it 'open the last md file when already exists' do
       allow(::TTY::Editor).to(
         receive(:open)
