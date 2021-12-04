@@ -10,12 +10,13 @@ module Work
           't' => 'today',
           'ty' => 'tyesterday',
           'y' => 'yesterday',
+          'to' => 'tomorrow',
           'c' => 'config',
           'p' => 'parse',
           'pl' => 'plast',
           'a' => 'annotations',
-          'l' => 'last',
           'o' => 'open',
+          'l' => 'last',
           'tl' => 'tlast'
         }.freeze
 
@@ -62,6 +63,7 @@ module Work
           '- work-md today',
           '- work-md yesterday',
           '- work-md tyesterday',
+          '- work-md tomorrow',
           '- work-md last',
           '- work-md tlast',
           '- work-md parse',

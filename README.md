@@ -34,6 +34,10 @@ You can also set the editor directly in the command call:
 
     $ work-md ty
 
+### Open or create a new work markdown file for tomorrow:
+
+    $ work-md to
+
 ### Open specific date work markdown file(s):
 
 Day 1 from month 5 and year 2000:
@@ -139,6 +143,8 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 `work-md y`-> `work-md yesterday`
 
 `work-md ty`-> `work-md tyesterday`
+
+`work-md to`-> `work-md tomorrow`
 
 `work-md l`-> `work-md last`
 
