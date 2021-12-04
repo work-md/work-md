@@ -34,7 +34,7 @@ You can also set the editor directly in the command call:
 
     $ work-md ty
 
-### Open specific date file(s):
+### Open specific date work markdown file(s):
 
 Day 1 from month 5 and year 2000:
 
