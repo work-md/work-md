@@ -70,6 +70,30 @@ Last 15 days:
 
 The `-d` argument is required, except when we are using the `pl` command:
 
+### Open specific date file(s):
+
+The open command receive the same query arguments that `parse` command receives, but instead of parse it open all the files matching the query, ex:
+
+Day 1 from month 5 and year 2000:
+
+    $ work-md o -d=1 -m=5 -y=2000
+
+Day 1, 2 and 3 from the current month and year:
+
+    $ work-md o -d=1,2,3
+
+Day 1 and 2 from month 4 and current year:
+
+    $ work-md o -d=1,2 -m=4    
+
+Day 1 to 25 from month 2 and current year:
+
+    $ work-md o -d=1..25 -m=2    
+
+Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
+
+    $ work-md o -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
+
 ### Add permanent annotations:
 
 Sometimes we need to keep permanent annotations (not only for a specific day), so we can:
@@ -115,6 +139,8 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 `work-md p`-> `work-md parse`
 
 `work-md pl`-> `work-md plast`
+
+`work-md o`-> `work-md open`
 
 `work-md a`-> `work-md annotations`
 

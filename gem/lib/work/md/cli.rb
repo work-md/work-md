@@ -15,6 +15,7 @@ module Work
           'pl' => 'plast',
           'a' => 'annotations',
           'l' => 'last',
+          'o' => 'open',
           'tl' => 'tlast'
         }.freeze
 
@@ -66,13 +67,20 @@ module Work
           '- work-md parse',
           '- work-md plast',
           '- work-md annotations',
+          '- work-md open',
           '- work-md config',
           '',
           'for more information: github.com/work-md',
-          padding: 1,
-          title: { top_left: '(work-md)', bottom_right: "(v#{Work::Md::VERSION})" }
+          **normal_frame_style
         )
         # rubocop:enable Layout/LineLength
+      end
+
+      def self.normal_frame_style
+        {
+          padding: 1,
+          title: { top_left: '(work-md)', bottom_right: "(v#{Work::Md::VERSION})" }
+        }
       end
 
       def self.error_frame_style
