@@ -63,6 +63,7 @@ module Work
           '- work-md today',
           '- work-md yesterday',
           '- work-md tyesterday',
+          '- work-md tomorrow',
           '- work-md last',
           '- work-md tlast',
           '- work-md parse',
