@@ -162,7 +162,7 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 
     $ WORK_MD_TAG=other_project work-md t
 
-### Aliases / All commands:
+### Aliases -> All commands:
 
 `work-md t`-> `work-md today`
 
