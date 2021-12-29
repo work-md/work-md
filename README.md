@@ -108,7 +108,7 @@ Last 15 days:
 
 ### Delete your work markdown files:
 
-The query for delete files is the same as `open` and `parse` commands:
+The query for delete files is the same as `open` and `parse` commands, ex:
 
 Day 1 from month 5 and year 2000:
 
@@ -162,7 +162,7 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 
     $ WORK_MD_TAG=other_project work-md t
 
-### Aliases:
+### Aliases / All commands:
 
 `work-md t`-> `work-md today`
 
