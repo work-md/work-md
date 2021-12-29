@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   spec.add_dependency 'tty-box', '~> 0.7.0'
   spec.add_dependency 'tty-editor', '~> 0.7.0'
+  spec.add_dependency 'tty-prompt', '~> 0.23.1'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

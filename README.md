@@ -106,6 +106,32 @@ Last 15 days:
 
     $ work-md pl 15
 
+### Delete your work markdown files:
+
+The query for delete files is the same as `open` and `parse` commands:
+
+Day 1 from month 5 and year 2000:
+
+    $ work-md d -d=1 -m=5 -y=2000
+
+Day 1, 2 and 3 from the current month and year:
+
+    $ work-md d -d=1,2,3
+
+Day 1 and 2 from month 4 and current year:
+
+    $ work-md d -d=1,2 -m=4    
+
+Day 1 to 25 from month 2 and current year:
+
+    $ work-md d -d=1..25 -m=2    
+
+Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
+
+    $ work-md d -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
+
+The `-d` argument is required in all cases.
+
 ### Add permanent annotations:
 
 Sometimes we need to keep permanent annotations (not only for a specific day), so we can:
@@ -155,6 +181,8 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 `work-md pl`-> `work-md plast`
 
 `work-md o`-> `work-md open`
+
+`work-md d`-> `work-md delete`
 
 `work-md a`-> `work-md annotations`
 
