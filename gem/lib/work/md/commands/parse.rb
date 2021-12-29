@@ -7,34 +7,10 @@ module Work
         class << self
           def execute(argv = [])
             parser = Work::Md::Parser::Engine.new
-            argv_keys_to_parser = -> (argv_keys, received_parser) {
-              year = argv_keys['y'] || Time.new.year
-              month = argv_keys['m'] || Time.new.month
 
-              month = "0#{month.to_i}" if month.to_i < 10
-
-              add_file_to_parser = lambda do |day|
-                day = "0#{day.to_i}" if day.to_i < 10
-
-                file_name = Work::Md::Config.work_dir + "/#{year}/#{month}/#{day}.md"
-
-                received_parser.add_file(file_name)
-              end
-
-              if argv_keys['d'].include?('..')
-                range = argv_keys['d'].split('..')
-
-                (range[0].to_i..range[1].to_i).each { |day| add_file_to_parser.call(day) }
-              else
-                argv_keys['d'].split(',').each { |day| add_file_to_parser.call(day) }
-              end
-
-              received_parser
-            }
-
-            argv.join('#').split('#and#').map { |v| v.split("#") }.each do |args|
-              argv_keys_to_parser.(Work::Md::Cli.fetch_argv_keys(args), parser)
-            end
+            Work::Md::DateFile
+              .list_file_names_by_argv_query(argv)
+              .each { |file_name| parser.add_file(file_name) }
 
             Work::Md::File.create_and_open_parsed(parser)
           rescue Work::Md::Parser::Error => e

@@ -5,3 +5,4 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in work_md.gemspec
 gem 'tty-box', '~> 0.7.0'
 gem 'tty-editor', '~> 0.7.0'
+gem 'tty-prompt', '~> 0.23.1'

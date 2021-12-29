@@ -16,6 +16,7 @@ module Work
           'pl' => 'plast',
           'a' => 'annotations',
           'o' => 'open',
+          'd' => 'delete',
           'l' => 'last',
           'tl' => 'tlast'
         }.freeze

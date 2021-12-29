@@ -9,6 +9,41 @@ module Work
         )
       end
 
+      def self.list_file_names_by_argv_query(argv)
+        file_names = []
+
+        argv_keys_to_files = -> (argv_keys, acc_file_names) {
+          year = argv_keys['y'] || Time.new.year
+          month = argv_keys['m'] || Time.new.month
+
+          month = "0#{month.to_i}" if month.to_i < 10
+
+          add_file_to_open = lambda do |day|
+            day = "0#{day.to_i}" if day.to_i < 10
+
+            file_name = Work::Md::Config.work_dir + "/#{year}/#{month}/#{day}.md"
+
+            acc_file_names.push(file_name) if ::File.exist? file_name
+          end
+
+          if argv_keys['d'].include?('..')
+            range = argv_keys['d'].split('..')
+
+            (range[0].to_i..range[1].to_i).each { |day| add_file_to_open.call(day) }
+          else
+            argv_keys['d'].split(',').each { |day| add_file_to_open.call(day) }
+          end
+
+          acc_file_names
+        }
+
+        argv.join('#').split('#and#').map { |v| v.split("#") }.each do |args|
+          argv_keys_to_files.(Work::Md::Cli.fetch_argv_keys(args), file_names)
+        end
+
+        file_names
+      end
+
       def self.create_if_not_exist(some_date, dir: nil)
         t = Work::Md::Config.translations
         work_dir = dir || Work::Md::Config.work_dir
