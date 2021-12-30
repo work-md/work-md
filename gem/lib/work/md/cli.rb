@@ -69,6 +69,7 @@ module Work
           '- work-md tlast',
           '- work-md parse',
           '- work-md plast',
+          '- work-md delete',
           '- work-md annotations',
           '- work-md open',
           '- work-md config',
@@ -82,7 +83,7 @@ module Work
       def self.normal_frame_style
         {
           padding: 1,
-          title: { top_left: '(work-md)', bottom_right: "(v#{Work::Md::VERSION})" }
+          title: { top_left: '(work-md 📝)', bottom_right: "(v#{Work::Md::VERSION})" }
         }
       end
 
