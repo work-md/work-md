@@ -2,6 +2,7 @@
 
 ![](https://img.shields.io/gem/v/work-md?style=social)
 
+# work-md cli
 Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!
 
 ## Installation
