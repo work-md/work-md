@@ -3,7 +3,13 @@
 ![](https://img.shields.io/gem/v/work-md?style=social)
 
 # work-md cli
-Track your work activities, write annotations, recap what you did for a week, month or specific days... and much more!
+- [x] Keep your work activities organized in markdown by date        
+- [x] Easily remember what you did in a specific day            
+- [x] Parse your work progress for a week, month or specific days
+- [x] Write permanent and private annotations                   
+- [x] Organize multiples projects
+- [x] Be more productive in your work, keeping sanity in your personal life      
+- [x] Get everything under control                 
 
 ## Installation
 
@@ -83,18 +89,6 @@ Day 1 from month 5 and year 2000:
 
     $ work-md p -d=1 -m=5 -y=2000
 
-Day 1, 2 and 3 from the current month and year:
-             
-    $ work-md p -d=1,2,3
-
-Day 1 and 2 from month 4 and current year:
-
-    $ work-md p -d=1,2 -m=4    
-
-Day 1 to 25 from month 2 and current year:
-
-    $ work-md p -d=1..25 -m=2    
-
 Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 
     $ work-md p -d=1..25 -m=2 and -d=1..25 -m=2 -y=1999
@@ -114,18 +108,6 @@ The query for delete files is the same as `open` and `parse` commands, ex:
 Day 1 from month 5 and year 2000:
 
     $ work-md d -d=1 -m=5 -y=2000
-
-Day 1, 2 and 3 from the current month and year:
-
-    $ work-md d -d=1,2,3
-
-Day 1 and 2 from month 4 and current year:
-
-    $ work-md d -d=1,2 -m=4    
-
-Day 1 to 25 from month 2 and current year:
-
-    $ work-md d -d=1..25 -m=2    
 
 Day 1 to 25 from month 2 and current year and 1 to 25 from month 2 in 1999:
 
@@ -163,7 +145,7 @@ It will scope the command to the `other_project` tag, behind the scenes a tag is
 
     $ WORK_MD_TAG=other_project work-md t
 
-### Aliases -> All commands:
+### Aliases:
 
 `work-md t`-> `work-md today`
 
