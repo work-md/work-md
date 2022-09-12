@@ -12,7 +12,7 @@ module Work
       def self.list_file_paths_by_argv_query(argv, create_inexistent: false)
         file_paths = []
 
-        argv_keys_to_files = -> (argv_keys, acc_file_paths) {
+        argv_keys_to_files = lambda { |argv_keys, acc_file_paths|
           year = argv_keys['y'] || Time.new.year
           month = argv_keys['m'] || Time.new.month
 
@@ -43,8 +43,8 @@ module Work
           acc_file_paths
         }
 
-        argv.join('#').split('#and#').map { |v| v.split("#") }.each do |args|
-          argv_keys_to_files.(Work::Md::Cli.fetch_argv_keys(args), file_paths)
+        argv.join('#').split('#and#').map { |v| v.split('#') }.each do |args|
+          argv_keys_to_files.call(Work::Md::Cli.fetch_argv_keys(args), file_paths)
         end
 
         file_paths
