@@ -12,6 +12,8 @@ RSpec.describe Work::Md::Commands::Delete do
       allow(::File).to(receive(:delete).and_return(true))
       allow(::File).to(receive(:exist?).and_return(true))
 
+      allow_any_instance_of(Time).to(receive(:month).and_return(10))
+
       expected_file_to_open = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/30.md"
 
       expect(::File)
@@ -23,6 +25,8 @@ RSpec.describe Work::Md::Commands::Delete do
     it 'given two days, it delete this days in current month and year' do
       allow(::File).to(receive(:delete).and_return(true))
       allow(::File).to(receive(:exist?).and_return(true))
+
+      allow_any_instance_of(Time).to(receive(:month).and_return(10))
 
       expected_file_to_open1 = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/30.md"
       expected_file_to_open2 = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/25.md"

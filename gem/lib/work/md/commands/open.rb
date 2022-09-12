@@ -6,9 +6,9 @@ module Work
       class Open
         class << self
           def execute(argv = [])
-            file_names = Work::Md::DateFile.list_file_names_by_argv_query(argv)
+            file_paths = Work::Md::DateFile.list_file_paths_by_argv_query(argv)
 
-            if file_names == []
+            if file_paths == []
               puts ::TTY::Box.frame(
                   "message: File(s) not found!",
                   **Work::Md::Cli.error_frame_style
@@ -17,7 +17,7 @@ module Work
               return
             end
 
-            Work::Md::File.open_in_editor(file_names)
+            Work::Md::File.open_in_editor(file_paths)
           rescue StandardError
             Work::Md::Cli.help(
               ::TTY::Box.frame(

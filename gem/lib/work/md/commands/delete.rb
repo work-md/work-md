@@ -8,9 +8,9 @@ module Work
           def execute(argv = [])
             prompt = TTY::Prompt.new
 
-            file_names = Work::Md::DateFile.list_file_names_by_argv_query(argv)
+            file_paths = Work::Md::DateFile.list_file_paths_by_argv_query(argv)
 
-            if file_names == []
+            if file_paths == []
               puts ::TTY::Box.frame(
                 "message: File(s) not found!",
                 **Work::Md::Cli.error_frame_style
@@ -19,7 +19,7 @@ module Work
               return
             end
 
-            file_names.each do |file_name|
+            file_paths.each do |file_name|
               if prompt.yes?("Do you really want to delete \"#{file_name}\"!?")
                 ::File.delete(file_name)
               end

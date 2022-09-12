@@ -8,6 +8,8 @@ RSpec.describe Work::Md::Commands::Open do
       allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
       allow(::File).to(receive(:exist?).and_return(true))
 
+      allow_any_instance_of(Time).to(receive(:month).and_return(10))
+
       expected_file_to_open = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/30.md"
 
       expect(Work::Md::File)
@@ -19,6 +21,8 @@ RSpec.describe Work::Md::Commands::Open do
     it 'given two days, it open this days in current month and year' do
       allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
       allow(::File).to(receive(:exist?).and_return(true))
+
+      allow_any_instance_of(Time).to(receive(:month).and_return(10))
 
       expected_file_to_open1 = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/30.md"
       expected_file_to_open2 = Work::Md::Config.work_dir + "/#{Time.new.year}/#{Time.new.month}/25.md"
