@@ -6,7 +6,10 @@ module Work
       class Open
         class << self
           def execute(argv = [])
-            file_paths = Work::Md::DateFile.list_file_paths_by_argv_query(argv)
+            file_paths =
+              Work::Md::DateFile.list_file_paths_by_argv_query(
+                argv,
+              )
 
             if file_paths == []
               puts ::TTY::Box.frame(

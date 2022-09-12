@@ -3,19 +3,6 @@
 module Work
   module Md
     class File
-      def self.open_in_editor(file_names = [], dir: nil)
-        editor = Work::Md::Config.editor
-        work_dir = dir || Work::Md::Config.work_dir
-
-        ::FileUtils.cd(work_dir) do
-          ENV['EDITOR'] = editor unless editor.nil?
-
-          return ::TTY::Editor.open(file_names[0]) if file_names[1].nil?
-
-          ::TTY::Editor.open(file_names[0], file_names[1])
-        end
-      end
-
       def self.create_and_open_parsed(parser)
         parser.freeze
 
@@ -75,6 +62,19 @@ module Work
         end
 
         Work::Md::File.open_in_editor([parsed_file_path])
+      end
+
+      def self.open_in_editor(file_names = [])
+        editor = Work::Md::Config.editor
+        work_dir = Work::Md::Config.work_dir
+
+        ::FileUtils.cd(work_dir) do
+          ENV['EDITOR'] = editor unless editor.nil?
+
+          return ::TTY::Editor.open(file_names[0]) if file_names[1].nil?
+
+          ::TTY::Editor.open(*file_names)
+        end
       end
     end
   end
