@@ -3,13 +3,13 @@
 module Work
   module Md
     class DateFile
-      def self.open_or_create(some_date, dir: nil)
+      def self.open_or_create(some_date)
         Work::Md::File.open_in_editor(
-          [create_if_not_exist(some_date, dir: dir)], dir: dir
+          [create_if_not_exist(some_date)]
         )
       end
 
-      def self.list_file_paths_by_argv_query(argv)
+      def self.list_file_paths_by_argv_query(argv, create_inexistent: false)
         file_paths = []
 
         argv_keys_to_files = -> (argv_keys, acc_file_paths) {
@@ -23,7 +23,13 @@ module Work
 
             file_path = Work::Md::Config.work_dir + "/#{year}/#{month}/#{day}.md"
 
-            acc_file_paths.push(file_path) if ::File.exist? file_path
+            if create_inexistent
+              create_if_not_exist(DateTime.new(year.to_i, month.to_i, day.to_i))
+
+              acc_file_paths.push(file_path)
+            elsif ::File.exist? file_path
+              acc_file_paths.push(file_path)
+            end
           end
 
           if argv_keys['d'].include?('..')
@@ -44,9 +50,9 @@ module Work
         file_paths
       end
 
-      def self.create_if_not_exist(some_date, dir: nil)
+      def self.create_if_not_exist(some_date)
         t = Work::Md::Config.translations
-        file = date_to_file_locations(some_date, dir: dir)
+        file = date_to_file_locations(some_date)
         return file[:name] if ::File.exist?(file[:path])
 
         ::FileUtils
@@ -76,8 +82,8 @@ module Work
         file[:name]
       end
 
-      def self.date_to_file_locations(some_date, dir: nil)
-        work_dir = dir || Work::Md::Config.work_dir
+      def self.date_to_file_locations(some_date)
+        work_dir = Work::Md::Config.work_dir
 
         {
           name: "#{some_date.strftime('%Y/%m/%d')}.md",
