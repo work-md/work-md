@@ -27,7 +27,7 @@ module Work
           rescue StandardError
             Work::Md::Cli.help(
               ::TTY::Box.frame(
-                "message: Some error occurred interpreting your command!",
+                "message: Some error occurred interpreting your command or the date sent is invalid!",
                 '',
                 'Usage examples:',
                 '',

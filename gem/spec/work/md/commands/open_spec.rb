@@ -37,16 +37,30 @@ RSpec.describe Work::Md::Commands::Open do
       allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
       allow(::File).to(receive(:exist?).and_return(true))
 
-      expected_file_to_open = Work::Md::Config.work_dir + "/1999/02/30.md"
+      expected_file_to_open = Work::Md::Config.work_dir + "/1999/02/20.md"
 
       expect(Work::Md::File)
         .to(receive(:open_in_editor).with([expected_file_to_open]))
 
-      described_class.execute(["-d=30","-m=2","-y=1999"])
+      described_class.execute(["-d=20","-m=2","-y=1999"])
+    end
+
+    describe 'when file not exists' do
+      it 'creates a file' do
+        allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
+        allow(::File).to(receive(:exist?).and_return(false))
+
+        expected_file_to_open = Work::Md::Config.work_dir + "/1999/02/20.md"
+
+        expect(Work::Md::File)
+          .to(receive(:open_in_editor).with([expected_file_to_open]))
+
+        described_class.execute(["-d=20","-m=2","-y=1999"])
+      end
     end
 
     context 'error' do
-      describe 'when file not exists' do
+      describe 'when no arguments' do
         it 'returns a message' do
           allow(Work::Md::File).to(receive(:open_in_editor).and_return(true))
           allow(::File).to(receive(:exist?).and_return(false))
@@ -54,7 +68,7 @@ RSpec.describe Work::Md::Commands::Open do
           expect(Work::Md::File)
             .to_not(receive(:open_in_editor))
 
-          expect { described_class.execute(["-d=30","-m=2","-y=1999"]) }
+          expect { described_class.execute([]) }
             .to output(/message: File\(s\) not found!/).to_stdout
         end
       end

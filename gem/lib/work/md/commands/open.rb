@@ -9,6 +9,7 @@ module Work
             file_paths =
               Work::Md::DateFile.list_file_paths_by_argv_query(
                 argv,
+                create_inexistent: true
               )
 
             if file_paths == []
@@ -21,10 +22,10 @@ module Work
             end
 
             Work::Md::File.open_in_editor(file_paths)
-          rescue StandardError
+          rescue
             Work::Md::Cli.help(
               ::TTY::Box.frame(
-                "message: Some error occurred interpreting your command!",
+                "message: Some error occurred interpreting your command or the date sent is invalid!",
                 '',
                 'Usage examples:',
                 '',
