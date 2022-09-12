@@ -6,9 +6,13 @@ module Work
       class Open
         class << self
           def execute(argv = [])
-            file_names = Work::Md::DateFile.list_file_names_by_argv_query(argv)
+            file_paths =
+              Work::Md::DateFile.list_file_paths_by_argv_query(
+                argv,
+                create_inexistent: true
+              )
 
-            if file_names == []
+            if file_paths == []
               puts ::TTY::Box.frame(
                   "message: File(s) not found!",
                   **Work::Md::Cli.error_frame_style
@@ -17,11 +21,11 @@ module Work
               return
             end
 
-            Work::Md::File.open_in_editor(file_names)
-          rescue StandardError
+            Work::Md::File.open_in_editor(file_paths)
+          rescue
             Work::Md::Cli.help(
               ::TTY::Box.frame(
-                "message: Some error occurred interpreting your command!",
+                "message: Some error occurred interpreting your command or the date sent is invalid!",
                 '',
                 'Usage examples:',
                 '',

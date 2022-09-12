@@ -9,8 +9,8 @@ module Work
             parser = Work::Md::Parser::Engine.new
 
             Work::Md::DateFile
-              .list_file_names_by_argv_query(argv)
-              .each { |file_name| parser.add_file(file_name) }
+              .list_file_paths_by_argv_query(argv)
+              .each { |file_path| parser.add_file(file_path) }
 
             Work::Md::File.create_and_open_parsed(parser)
           rescue Work::Md::Parser::Error => e

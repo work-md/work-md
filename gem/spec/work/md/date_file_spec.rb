@@ -41,25 +41,6 @@ RSpec.describe Work::Md::DateFile do
       expect(file_content).to match(t[:pomodoros])
     end
 
-    it 'creates the md file in any dir' do
-      allow(::TTY::Editor).to(
-        receive(:open)
-        .and_return(true)
-      )
-
-      described_class.open_or_create(some_date, dir: dir_2)
-
-      expect(
-        ::File
-        .exist?(expected_md_file_2)
-      ).to be_truthy
-
-      t = Work::Md::Config.translations
-      file_content = ::File.read(expected_md_file_2)
-
-      expect(file_content).to match(Work::Md::Config.title)
-    end
-
     it 'dont creates the md file when already exists' do
       allow(::TTY::Editor).to(
         receive(:open)
