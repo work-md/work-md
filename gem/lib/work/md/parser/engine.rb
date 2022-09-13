@@ -91,7 +91,7 @@ module Work
           raise IS_NOT_FROZEN_ERROR_MESSAGE unless @frozen
 
           @pomodoros_sum ||=
-            @parsed_files.reduce(0) { |sum, f| sum + f.pomodoros || 0 }
+            @parsed_files.reduce(0) { |sum, f| sum + (f.pomodoros || 0) }
         end
 
         def pomodoros_bars(_file = nil)
@@ -99,7 +99,7 @@ module Work
 
           @pomodoros_bars ||=
             @parsed_files.map do |f|
-              "(#{f.date}) #{(1..f.pomodoros).map { '⬛' }.join}"
+              "(#{f.date}) #{(1..(f.pomodoros || 0)).map { '⬛' }.join}"
             end
         end
 
@@ -112,7 +112,7 @@ module Work
 
           @days_bars ||=
             @parsed_files.map do |f|
-              pom = (1..f.pomodoros).map { '⬛' }.join if f.pomodoros
+              pom = (1..(f.pomodoros || 0)).map { '⬛' }.join if f.pomodoros
               mee = f.meetings.map { '📅' }.join if f.meetings
               int = f.interruptions.map { '⚠️' }.join if f.interruptions
               dif = f.difficulties.map { '😓' }.join if f.difficulties
