@@ -25,8 +25,10 @@
 
 Run the following commands:
 
-    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-linux-x86_64.tar.gz |
+    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.4.9-linux-x86_64.tar.gz |
     $ tar -xzf work-md-0.4.9.tar.gz
+    $ cd work-md-0.4.9-linux-x86_64
+    $ ./work-md
 
 ## Usage
 
