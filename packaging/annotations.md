@@ -9,13 +9,15 @@ BUNDLED WITH
 
 5. Update README with newer versions, following the template:
 
+any doubt: https://github.com/phusion/traveling-ruby
+
 ### From binaries
 
 #### Linux users
 
 Run the following commands:
 
-    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.4.9-linux-x86_64.tar.gz |
+    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.4.9-linux-x86_64.tar.gz
     $ tar -xzf work-md-0.4.9.tar.gz
     $ cd work-md-0.4.9-linux-x86_64
     $ ./work-md
@@ -24,8 +26,8 @@ Run the following commands:
 
 Run the following commands:
 
-    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.4.9-linux-x86_64.tar.gz |
+    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.4.9-osx.tar.gz
     $ tar -xzf work-md-0.4.9.tar.gz
-    $ cd work-md-0.4.9-linux-x86_64
+    $ cd work-md-0.4.9-osx
     $ ./work-md
 
