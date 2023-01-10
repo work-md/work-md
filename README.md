@@ -19,6 +19,15 @@
 
     $ gem install work-md
 
+### Without Ruby
+
+#### Linux users
+
+Run the following commands:
+
+    $ curl -L -o work-md-0.4.9.tar.gz https://github.com/work-md/work-md/raw/master/work-md-0.3.10-linux-x86_64.tar.gz |
+    $ tar -xzf work-md-0.4.9.tar.gz
+
 ## Usage
 
 ### Open or create a new work markdown file for today:
