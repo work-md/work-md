@@ -4,4 +4,4 @@
 require_relative '../lib/work/md'
 # require 'work/md'
 
-Work::Md::Cli.execute(ARGV)
+Work::Md::Cli.execute(ARGV, development: true)

@@ -21,7 +21,7 @@ module Work
           'tl' => 'tlast'
         }.freeze
 
-      def self.execute(argv)
+      def self.execute(argv, development: false)
         first_argv_argument = argv.shift
         tag = fetch_argv_keys(argv)['tag']
 
@@ -70,6 +70,7 @@ module Work
           '- work-md parse',
           '- work-md plast',
           '- work-md annotations',
+          '- work-md daily',
           '- work-md open',
           '- work-md config',
           '',
