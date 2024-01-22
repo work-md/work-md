@@ -112,6 +112,12 @@ Last 15 days:
 
     $ work-md pl 15
 
+### Quick scrum daily in text:
+
+Get today and the last work day and parse in a "done / todo" message for async scrum daily texts:
+
+    $ work-md daily
+
 ### Delete your work markdown files:
 
 The query for delete files is the same as `open` and `parse` commands, ex:

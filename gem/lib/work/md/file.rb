@@ -6,7 +6,7 @@ module Work
       def self.create_and_open_parsed(parser)
         parser.freeze
 
-        parsed_file_path = Work::Md::Config.work_dir + '/parsed.md'
+        parsed_file_path = "#{Work::Md::Config.work_dir}/parsed.md"
         t = Work::Md::Config.translations
 
         ::File.delete(parsed_file_path) if ::File.exist? parsed_file_path

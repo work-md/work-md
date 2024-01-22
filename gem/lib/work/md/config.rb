@@ -17,7 +17,9 @@ module Work
             pomodoros: 'Pomodoros / Ciclos',
             per_day: 'por dia',
             total: 'total',
-            days_bars: 'Resumo'
+            days_bars: 'Resumo',
+            did: 'Feito',
+            todo: 'Planejado'
           },
         'en' =>
           {
@@ -29,7 +31,9 @@ module Work
             pomodoros: 'Pomodoros / Cycles',
             per_day: 'per day',
             total: 'all',
-            days_bars: 'Summary'
+            days_bars: 'Summary',
+            did: 'Done',
+            todo: 'To do'
           },
         'es' =>
           {
@@ -41,7 +45,9 @@ module Work
             pomodoros: 'Pomodoros / Ciclos',
             per_day: 'por día',
             total: 'total',
-            days_bars: 'Abstracto'
+            days_bars: 'Abstracto',
+            did: 'Hecho',
+            todo: 'Planificado'
           }
       }.freeze
 
