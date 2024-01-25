@@ -1,4 +1,4 @@
-![Work::Md](https://raw.githubusercontent.com/work-md/work-md/master/work-md-resized-2.png)
+![Work::Md](https://raw.githubusercontent.com/work-md/work-md/master/work-md.png)
 
 ![](https://img.shields.io/gem/v/work-md?style=social)
 
