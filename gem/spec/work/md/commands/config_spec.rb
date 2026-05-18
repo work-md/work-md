@@ -59,8 +59,7 @@ RSpec.describe Work::Md::Commands::Config do
         expect(Work::Md::File).to(
           receive(:open_in_editor)
           .with(
-            [file_name],
-            dir: ::Work::Md::Config::DEFAULT_WORK_DIR
+            [file_name]
           )
         )
 

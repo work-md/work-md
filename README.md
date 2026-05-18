@@ -15,7 +15,7 @@
 
 ### With Ruby
 
-*Ruby (>= 2.3)* must be installed in your machine, then install `work-md` with:
+If *Ruby (>= 2.3)* is installed in your machine, install `work-md` with:
 
     $ gem install work-md
 

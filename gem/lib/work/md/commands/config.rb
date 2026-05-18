@@ -26,8 +26,7 @@ module Work
             end
 
             ::Work::Md::File.open_in_editor(
-              [file_name],
-              dir: work_dir
+              [file_name]
             )
           end
         end

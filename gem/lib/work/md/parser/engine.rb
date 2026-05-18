@@ -219,10 +219,10 @@ module Work
           return list unless list.is_a?(Array)
 
           list
-            .map { |s| s.gsub('---', '') unless s.nil? }
+            .map { |s| s&.gsub('---', '') }
             .select { |s| (s != "\n\n") && (s != "\n\n\n") }
             .map(&:strip)
-            .reject { |s| (s == '') }
+            .reject { |s| s == '' }
         end
         # rubocop:enable Metrics/CyclomaticComplexity
       end

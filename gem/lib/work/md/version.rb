@@ -2,6 +2,6 @@
 
 module Work
   module Md
-    VERSION = '0.4.91'
+    VERSION = '0.5.0'
   end
 end
